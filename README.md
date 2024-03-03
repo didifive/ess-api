@@ -64,6 +64,7 @@ classDiagram
 
   Student o-- Class
   Student o-- Subject
+  Student *-- Grade
   Subject *-- Grade
   Student o-- Message
   Student o-- Shortcut
