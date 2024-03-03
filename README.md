@@ -62,12 +62,12 @@ classDiagram
     - description: string
   }
 
-  Student --> Class
-  Student --> Subject
-  Subject --> Grade
-  Student --> Message
-  Student --> Shortcut
-  Student --> News
+  Student o-- Class
+  Student o-- Subject
+  Subject *-- Grade
+  Student o-- Message
+  Student o-- Shortcut
+  Student o-- News
 ``` 
 
 <details>
