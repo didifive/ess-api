@@ -163,10 +163,12 @@ classDiagram
     note "All entity classes have Getters and Setters of private attributes, hashcode and equals"
     
     class BasicEntity {
+    <<Abstract>>
         - UUID id
     }
     
     class BasicItem {
+    <<Abstract>>
         - String icon
         - String name
     }
