@@ -11,7 +11,12 @@
 
 RESTful Desenvolvimento da API para projeto do bootcamp Java AI Powered da DIO.
 
-Construída com Java 21 e Spring Boot 3.2.3
+Construída com Java 21 e Spring Boot 3.2.3.
+
+## Principais tecnologias
+- **Java 21**: Versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
+- **Spring Boot 3**: Versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
+- **Spring Data JPA**: Ferramenta pode simplificar a camada de acesso aos dados, facilitando a integração com bancos de dados SQL;
 
 ## 🖼️ Amostra com Figma
 
@@ -21,6 +26,9 @@ O projeto iniciou com a montagem de uma amostra da aplicação utilizando o Figm
 ## 💡 Diagrama de Classes (Domínio da API)
 
 Diagrama de classes com sintaxe [Mermaid], criado a partir da abstração de atributos em JSON com base na amostra do Figma e prompt com Microsoft Copilot. 
+
+<details>
+  <summary>Ver diagrama de classes criado com Microsoft Copilot</summary>
 
 ```mermaid
 classDiagram
@@ -69,6 +77,8 @@ classDiagram
   Student o-- Shortcut
   Student o-- News
 ``` 
+
+</details>
 
 <details>
   <summary>Prompt utilizado no Microsoft Copilot</summary>
@@ -145,7 +155,127 @@ classDiagram
   }
 </details>
 
+Com base no diagrama criado pela IA e a documentação do [Mermaid], o diagrama foi editado para deixar as classes no padrão Java e criar as relações para o JPA:
 
+```mermaid
+classDiagram
+
+    note "All entity classes have Getters and Setters of private attributes, hashcode and equals"
+    
+    class BasicEntity {
+        - UUID id
+    }
+    
+    class BasicItem {
+        - String icon
+        - String name
+    }
+    
+    class Student {
+        - String name
+        - String guardian
+        - String photo
+    }
+    
+    class Course {
+        - String name
+        - Frequency frequency
+        - String period
+        - LocalDate initDate
+        - LocalDate recoveryDate
+        - LocalDate endDate
+        - Set~Student~ students
+        - Set~Subject~ subjects
+        - Set~Message~ messages
+        - Set~News~ news
+        - Set~Shortcut~ shortcuts
+        + CourseStatus status(Student student)
+    }
+    
+    class Frequency {
+        <<Enumeration>>
+        YEARLY
+        SEMI_ANNUAL
+        QUARTERLY
+        BIMONTHLY
+        MONTHLY
+    }
+    
+    class CourseStatus {
+        <<Enumeration>>
+        ONGOING
+        APPROVED
+        RECOVERY
+        DISAPPROVED
+    }
+    
+    
+    
+    class Message {
+        - String description
+        - LocalDateTime dateTime
+    }
+    
+    class MessageRead {
+        - ReadMessageId id
+        - Boolean read
+        - LocalDateTime dateTime
+    }
+    
+    class MessageReadId {
+        - Student student
+        - Message Message
+    }
+    
+    class News {
+        - String description
+    }
+    
+    class Grade {
+        - String type
+        - BigDecimal value
+    }
+    
+    class GradeId {
+        - Student student
+        - Course Course
+        - Subject subject
+    }
+    
+    class GradeType {
+        <<Enumeration>>
+        FINAL
+        PARTIAL
+        ONGOING
+    }
+    
+    class Shortcut
+    
+    class Subject
+
+    BasicEntity <|-- Student
+    BasicEntity <|-- Course
+    BasicEntity <|-- Message
+    BasicEntity <|-- BasicItem
+    BasicItem <|-- Shortcut
+    BasicItem <|-- News
+    BasicItem <|-- Subject
+    Course --> Student
+    Course --> Subject
+    Course --> Message
+    Course --> News
+    Course --> Shortcut
+    Course .. CourseStatus
+    Course .. Frequency
+    MessageRead ..> MessageReadId
+    MessageRead --* Message
+    MessageRead --* Student
+    Grade ..> GradeId
+    Grade .. GradeType
+    Grade --* Student
+    Grade --* Course
+    Grade --* Subject
+``` 
 
 
 [Mermaid]: https://mermaid.js.org/
