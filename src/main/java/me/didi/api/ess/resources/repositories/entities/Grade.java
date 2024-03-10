@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 public class Grade {
     @EmbeddedId
     private GradeId id;
-    @Column(scale = 4, precision = 2)
-    private BigDecimal gradeValue;
+    @Column(name="grade_value", precision = 5, scale = 2)
+    private BigDecimal value;
 
     public GradeId getId() {
         return id;
@@ -19,11 +19,11 @@ public class Grade {
         this.id = id;
     }
 
-    public BigDecimal getGradeValue() {
-        return gradeValue;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setGradeValue(BigDecimal gradeValue) {
-        this.gradeValue = gradeValue;
+    public void setValue(BigDecimal gradeValue) {
+        this.value = gradeValue;
     }
 }
