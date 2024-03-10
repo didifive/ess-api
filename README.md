@@ -165,22 +165,20 @@ classDiagram
     class BasicEntity {
     <<Abstract>>
         - UUID id
+        - String name
     }
     
     class BasicItem {
     <<Abstract>>
         - String icon
-        - String name
     }
-    
+
     class Student {
-        - String name
         - String guardian
         - String photo
     }
-    
+
     class Course {
-        - String name
         - Frequency frequency
         - String period
         - LocalDate initDate
@@ -193,7 +191,7 @@ classDiagram
         - Set~Shortcut~ shortcuts
         + CourseStatus status(Student student)
     }
-    
+
     class Frequency {
         <<Enumeration>>
         YEARLY
@@ -202,7 +200,7 @@ classDiagram
         BIMONTHLY
         MONTHLY
     }
-    
+
     class CourseStatus {
         <<Enumeration>>
         ONGOING
@@ -210,49 +208,47 @@ classDiagram
         RECOVERY
         DISAPPROVED
     }
-    
-    
-    
+
     class Message {
         - String description
         - LocalDateTime dateTime
     }
-    
+
     class MessageRead {
         - ReadMessageId id
         - Boolean read
         - LocalDateTime dateTime
     }
-    
+
     class MessageReadId {
         - Student student
         - Message Message
     }
-    
+
     class News {
         - String description
     }
-    
+
     class Grade {
         - String type
         - BigDecimal value
     }
-    
+
     class GradeId {
         - Student student
         - Course Course
         - Subject subject
     }
-    
+
     class GradeType {
         <<Enumeration>>
         FINAL
         PARTIAL
         ONGOING
     }
-    
+
     class Shortcut
-    
+
     class Subject
 
     BasicEntity <|-- Student
@@ -267,17 +263,18 @@ classDiagram
     Course --> Message
     Course --> News
     Course --> Shortcut
-    Course .. CourseStatus
-    Course .. Frequency
-    MessageRead ..> MessageReadId
-    MessageRead --* Message
-    MessageRead --* Student
-    Grade ..> GradeId
-    Grade .. GradeType
-    Grade --* Student
-    Grade --* Course
-    Grade --* Subject
+    Course ..> CourseStatus
+    Course ..> Frequency
+    MessageReadId <|-- MessageRead 
+    MessageReadId --* Student
+    MessageReadId --* Message
+    Grade ..> GradeType
+    GradeId <|-- Grade
+    GradeId --* Student
+    GradeId --* Course
+    GradeId --* Subject
 ``` 
 
+O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, o domínio central pode ser o **Curso** para facilitar as relações.
 
 [Mermaid]: https://mermaid.js.org/
