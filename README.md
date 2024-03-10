@@ -229,7 +229,7 @@ classDiagram
     }
 
     class Grade {
-        - String type
+        - GradeType type
         - BigDecimal value
     }
 
