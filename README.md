@@ -252,12 +252,12 @@ classDiagram
 
     class Subject
 
-    BasicEntity <|-- Student
-    BasicEntity <|-- Course
-    BasicEntity <|-- Message
     BasicEntity <|-- BasicItem
-    BasicItem <|-- Shortcut
+    BasicEntity <|-- Course
+    BasicEntity <|-- Student
+    BasicItem <|-- Message
     BasicItem <|-- News
+    BasicItem <|-- Shortcut
     BasicItem <|-- Subject
     Course --> Student
     Course --> Subject
