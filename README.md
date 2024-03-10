@@ -165,20 +165,24 @@ classDiagram
     class BasicEntity {
     <<Abstract>>
         - UUID id
-        - String name
     }
     
     class BasicItem {
     <<Abstract>>
         - String icon
+        - String title
+        - String description
     }
 
     class Student {
+        - String givenName
+        - String familyName
         - String guardian
         - String photo
     }
 
     class Course {
+        - String name
         - Frequency frequency
         - String period
         - LocalDate initDate
@@ -210,7 +214,6 @@ classDiagram
     }
 
     class Message {
-        - String description
         - LocalDateTime dateTime
     }
 
@@ -223,10 +226,6 @@ classDiagram
     class MessageReadId {
         - Student student
         - Message Message
-    }
-
-    class News {
-        - String description
     }
 
     class Grade {
@@ -246,6 +245,8 @@ classDiagram
         PARTIAL
         ONGOING
     }
+    
+    class News
 
     class Shortcut
 
