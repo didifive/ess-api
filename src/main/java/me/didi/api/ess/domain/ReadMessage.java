@@ -1,4 +1,9 @@
 package me.didi.api.ess.domain;
 
-public record ReadMessage() {
+import java.time.LocalDateTime;
+
+public record ReadMessage(Student student,
+                          Message message,
+                          Boolean read,
+                          LocalDateTime statusDateTime) {
 }

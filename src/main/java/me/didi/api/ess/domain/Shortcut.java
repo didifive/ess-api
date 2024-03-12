@@ -1,5 +1,6 @@
 package me.didi.api.ess.domain;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public record Shortcut(UUID id,
@@ -13,5 +14,18 @@ public record Shortcut(UUID id,
                 icon,
                 title,
                 description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shortcut shortcut = (Shortcut) o;
+        return Objects.equals(icon, shortcut.icon) && Objects.equals(title, shortcut.title) && Objects.equals(description, shortcut.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(icon, title, description);
     }
 }

@@ -159,9 +159,6 @@ Com base no diagrama criado pela IA e a documentação do [Mermaid], o diagrama 
 
 ```mermaid
 classDiagram
-
-    note "All entity classes have Getters and Setters of private attributes, hashcode and equals"
-    
     class BasicEntity {
     <<Abstract>>
         - UUID id
@@ -179,6 +176,7 @@ classDiagram
         - String familyName
         - String guardian
         - String photo
+        - Set~Grade~ grades
     }
 
     class Course {
@@ -274,6 +272,9 @@ classDiagram
     GradeId --* Student
     GradeId --* Course
     GradeId --* Subject
+    Student --> Grade
+    
+    note "All entity classes have Getters and Setters of private attributes, hashcode and equals"
 ``` 
 
 O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, o domínio central pode ser o **Curso** para facilitar as relações.
