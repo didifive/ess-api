@@ -176,34 +176,46 @@ classDiagram
         - String familyName
         - String guardian
         - String photo
-        - Set~Grade~ grades
     }
 
     class Course {
         - String name
         - Frequency frequency
-        - String period
-        - LocalDate initDate
-        - LocalDate recoveryDate
-        - LocalDate endDate
-        - Set~Student~ students
-        - Set~Subject~ subjects
+    }
+
+    class Clazz {
+        - String name
+        - Course course
         - Set~Message~ messages
         - Set~News~ news
         - Set~Shortcut~ shortcuts
-        + CourseStatus status(Student student)
+    }
+
+    class RegistrationId {
+        - Student student
+        - Clazz class
+    }
+    
+    class Registration {
+        - RegistrationId id
+        - String period
+        - Set~Subject~ subjects
+        - LocalDateTime registrationDate
+        - LocalDate recoveryDate
+        - LocalDate endDate
+        + RegistrationStatus status()
     }
 
     class Frequency {
         <<Enumeration>>
         YEARLY
-        SEMI_ANNUAL
+        SEMIANNUALLY
         QUARTERLY
         BIMONTHLY
         MONTHLY
     }
 
-    class CourseStatus {
+    class RegistrationStatus {
         <<Enumeration>>
         ONGOING
         APPROVED
@@ -212,29 +224,17 @@ classDiagram
     }
 
     class Message {
-        - LocalDateTime dateTime
-    }
-
-    class MessageRead {
-        - ReadMessageId id
-        - Boolean read
-        - LocalDateTime dateTime
-    }
-
-    class MessageReadId {
-        - Student student
-        - Message Message
-    }
-
-    class Grade {
-        - GradeType type
-        - BigDecimal value
     }
 
     class GradeId {
-        - Student student
-        - Course Course
+        - Registration registration
         - Subject subject
+    }
+
+    class Grade {
+        - GradeId id
+        - GradeType type
+        - BigDecimal value
     }
 
     class GradeType {
@@ -252,31 +252,28 @@ classDiagram
 
     BasicEntity <|-- BasicItem
     BasicEntity <|-- Course
+    BasicEntity <|-- Clazz
     BasicEntity <|-- Student
     BasicItem <|-- Message
     BasicItem <|-- News
     BasicItem <|-- Shortcut
     BasicItem <|-- Subject
-    Course --> Student
-    Course --> Subject
-    Course --> Message
-    Course --> News
-    Course --> Shortcut
-    Course ..> CourseStatus
     Course ..> Frequency
-    MessageReadId <|-- MessageRead 
-    MessageReadId --* Student
-    MessageReadId --* Message
+    Clazz --> Course
+    Clazz --> Message
+    Clazz --> News
+    Clazz --> Shortcut
+    RegistrationId --* Student
+    RegistrationId --* Clazz
+    RegistrationId <|-- Registration
+    Registration --> Subject
+    Registration ..> RegistrationStatus
     Grade ..> GradeType
     GradeId <|-- Grade
-    GradeId --* Student
-    GradeId --* Course
+    GradeId --* Registration
     GradeId --* Subject
-    Student --> Grade
-    
-    note "All entity classes have Getters and Setters of private attributes, hashcode and equals"
 ``` 
 
-O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, o domínio central pode ser o **Curso** para facilitar as relações.
+O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, este não era necessariamente o domínio central, existe uma dependência forte com **Curso**, **Turma** e **Matrícula** para ter a relação do estudante com as matérias e notas.
 
 [Mermaid]: https://mermaid.js.org/
