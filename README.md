@@ -181,14 +181,14 @@ classDiagram
     class Course {
         - String name
         - Frequency frequency
+        - Set~Message~ messages
+        - Set~News~ news
+        - Set~Shortcut~ shortcuts
     }
 
     class Clazz {
         - String name
         - Course course
-        - Set~Message~ messages
-        - Set~News~ news
-        - Set~Shortcut~ shortcuts
     }
 
     class RegistrationId {
@@ -209,7 +209,7 @@ classDiagram
     class Frequency {
         <<Enumeration>>
         YEARLY
-        SEMIANNUALLY
+        SEMI_ANNUAL
         QUARTERLY
         BIMONTHLY
         MONTHLY
@@ -259,10 +259,10 @@ classDiagram
     BasicItem <|-- Shortcut
     BasicItem <|-- Subject
     Course ..> Frequency
+    Course --> Message
+    Course --> News
+    Course --> Shortcut
     Clazz --> Course
-    Clazz --> Message
-    Clazz --> News
-    Clazz --> Shortcut
     RegistrationId --* Student
     RegistrationId --* Clazz
     RegistrationId <|-- Registration
