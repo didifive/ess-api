@@ -176,7 +176,6 @@ classDiagram
         - String familyName
         - String guardian
         - String photo
-        - Set~Grade~ grades
     }
 
     class Course {
@@ -243,10 +242,12 @@ classDiagram
         PARTIAL
         ONGOING
     }
-    
-    class News
 
-    class Shortcut
+    class Shortcut {
+        - String link
+    }
+
+    class News
 
     class Subject
 

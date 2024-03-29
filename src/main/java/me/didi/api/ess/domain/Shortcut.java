@@ -6,14 +6,17 @@ import java.util.UUID;
 public record Shortcut(UUID id,
                        String icon,
                        String title,
-                       String description) {
+                       String description,
+                       String link) {
     public Shortcut newShorcut(String icon,
-                        String title,
-                        String description){
+                               String title,
+                               String description,
+                               String link) {
         return new Shortcut(UUID.randomUUID(),
                 icon,
                 title,
-                description);
+                description,
+                link);
     }
 
     @Override
