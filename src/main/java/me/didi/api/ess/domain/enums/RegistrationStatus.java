@@ -1,6 +1,6 @@
 package me.didi.api.ess.domain.enums;
 
-public enum CourseStatus {
+public enum RegistrationStatus {
     ONGOING,
     APPROVED,
     RECOVERY,

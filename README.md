@@ -176,6 +176,7 @@ classDiagram
         - String familyName
         - String guardian
         - String photo
+        - Set~Grade~ grades
     }
 
     class Course {
@@ -193,12 +194,11 @@ classDiagram
 
     class RegistrationId {
         - Student student
-        - Clazz class
+        - Clazz clazz
     }
     
     class Registration {
         - RegistrationId id
-        - String period
         - Set~Subject~ subjects
         - LocalDateTime registrationDate
         - LocalDate recoveryDate
@@ -259,9 +259,9 @@ classDiagram
     BasicItem <|-- Shortcut
     BasicItem <|-- Subject
     Course ..> Frequency
-    Course --> Message
-    Course --> News
-    Course --> Shortcut
+    Course *-- Message
+    Course *-- News
+    Course *-- Shortcut
     Clazz --> Course
     RegistrationId --* Student
     RegistrationId --* Clazz

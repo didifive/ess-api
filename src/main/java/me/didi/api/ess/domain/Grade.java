@@ -5,8 +5,7 @@ import me.didi.api.ess.domain.enums.GradeType;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public record Grade(Student student,
-                    Course course,
+public record Grade(Registration registration,
                     Subject subject,
                     GradeType type,
                     BigDecimal value) {
@@ -15,11 +14,11 @@ public record Grade(Student student,
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grade grade = (Grade) o;
-        return Objects.equals(student, grade.student) && Objects.equals(course, grade.course) && Objects.equals(subject, grade.subject);
+        return Objects.equals(registration, grade.registration) && Objects.equals(subject, grade.subject) && type == grade.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(student, course, subject);
+        return Objects.hash(registration, subject, type);
     }
 }

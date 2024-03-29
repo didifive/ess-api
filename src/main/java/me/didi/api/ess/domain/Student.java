@@ -12,13 +12,14 @@ public record Student(UUID id,
     public Student newStudent(String givenName,
                               String familyName,
                               String guardian,
-                              String photo){
+                              String photo) {
         return new Student(UUID.randomUUID(),
                 givenName,
                 familyName,
                 guardian,
                 photo);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
