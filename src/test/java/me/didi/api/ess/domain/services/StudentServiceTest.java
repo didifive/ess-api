@@ -1,8 +1,8 @@
 package me.didi.api.ess.domain.services;
 
+import me.didi.api.ess.domain.exceptions.EntityNotFoundException;
 import me.didi.api.ess.resources.repositories.StudentRepository;
 import me.didi.api.ess.resources.repositories.entities.Student;
-import me.didi.api.ess.domain.exceptions.EntityNotFoundException;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static me.didi.api.ess.utils.Assertions.assertThrowsExceptionWithCorrectMessage;
-import static org.instancio.Select.field;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -36,12 +35,12 @@ class StudentServiceTest {
     private void assertStudent(Student expected, Student result) throws MultipleFailuresError {
         assertAll(
                 "Assert that Expected Student has been returned"
-                ,() -> assertNotNull(result)
-                ,() -> assertEquals(expected.getId(),			result.getId())
-                ,() -> assertEquals(expected.getGivenName(), 	result.getGivenName())
-                ,() -> assertEquals(expected.getFamilyName(),   result.getFamilyName())
-                ,() -> assertEquals(expected.getGuardian(),	    result.getGuardian())
-                ,() -> assertEquals(expected.getPhoto(), 	    result.getPhoto())
+                , () -> assertNotNull(result)
+                , () -> assertEquals(expected.getId(), result.getId())
+                , () -> assertEquals(expected.getGivenName(), result.getGivenName())
+                , () -> assertEquals(expected.getFamilyName(), result.getFamilyName())
+                , () -> assertEquals(expected.getGuardian(), result.getGuardian())
+                , () -> assertEquals(expected.getPhoto(), result.getPhoto())
         );
     }
 
@@ -68,7 +67,7 @@ class StudentServiceTest {
         List<Student> result = service.findAll();
 
         assertAll("Assert that a list of the Students has been returned",
-                () -> assertInstanceOf(List.class,result),
+                () -> assertInstanceOf(List.class, result),
                 () -> assertEquals(1, result.size()),
                 () -> assertStudent(student, result.getFirst())
         );
@@ -105,7 +104,6 @@ class StudentServiceTest {
         );
 
     }
-
 
 
 }
