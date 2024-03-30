@@ -83,11 +83,15 @@ public class PopulateCourses implements PopulateData {
 
 
         List<Course> courses = List.of(
-                new Course("Curso 1",
+                new Course("Curso Anual",
                         Frequency.YEARLY),
-                new Course("Curso 2",
+                new Course("Curso Semestral",
                         Frequency.SEMIANNUALLY),
-                new Course("Curso 3",
+                new Course("Curso Trimestral",
+                        Frequency.QUARTERLY),
+                new Course("Curso Bimestral",
+                        Frequency.BIMONTHLY),
+                new Course("Curso Mensal",
                         Frequency.MONTHLY));
 
         courses.forEach(c -> {

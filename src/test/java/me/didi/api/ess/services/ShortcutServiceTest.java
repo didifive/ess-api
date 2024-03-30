@@ -1,7 +1,6 @@
 package me.didi.api.ess.services;
 
 import me.didi.api.ess.entities.Shortcut;
-import me.didi.api.ess.entities.Shortcut;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.ShortcutRepository;
 import org.instancio.Instancio;
@@ -37,11 +36,11 @@ class ShortcutServiceTest {
         assertAll(
                 "Assert that Expected Shortcut has been returned"
                 , () -> assertNotNull(result)
-                , () -> assertEquals(expected.getId(),          result.getId())
-                , () -> assertEquals(expected.getIcon(),        result.getIcon())
-                , () -> assertEquals(expected.getTitle(),       result.getTitle())
+                , () -> assertEquals(expected.getId(), result.getId())
+                , () -> assertEquals(expected.getIcon(), result.getIcon())
+                , () -> assertEquals(expected.getTitle(), result.getTitle())
                 , () -> assertEquals(expected.getDescription(), result.getDescription())
-                , () -> assertEquals(expected.getLink(),        result.getLink())
+                , () -> assertEquals(expected.getLink(), result.getLink())
         );
     }
 
@@ -59,7 +58,7 @@ class ShortcutServiceTest {
 
         assertShortcut(shortcut, result);
     }
-    
+
     @Test
     @DisplayName("2. List Shortcuts")
     void findAll() {

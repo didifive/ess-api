@@ -1,9 +1,8 @@
 package me.didi.api.ess.services;
 
+import me.didi.api.ess.entities.Clazz;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.ClazzRepository;
-import me.didi.api.ess.entities.Clazz;
-import me.didi.api.ess.services.ClazzService;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,9 +36,9 @@ class ClazzServiceTest {
         assertAll(
                 "Assert that Expected Class has been returned"
                 , () -> assertNotNull(result)
-                , () -> assertEquals(expected.getId(),      result.getId())
-                , () -> assertEquals(expected.getName(),    result.getName())
-                , () -> assertEquals(expected.getCourse(),  result.getCourse())
+                , () -> assertEquals(expected.getId(), result.getId())
+                , () -> assertEquals(expected.getName(), result.getName())
+                , () -> assertEquals(expected.getCourse(), result.getCourse())
         );
     }
 

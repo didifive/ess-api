@@ -28,9 +28,7 @@ class RegistrationTest {
     public static final String HAS_PARTIAL_GRADE = "HasPartialGrade";
     public static final String HAS_PASSING_SCORE = "HasPassingScore";
     public static final String NO_PASSING_SCORE = "NoPassingScore";
-    public static final String GRADES_SUBJECTS_IS_LOWER_THAN_COURSE_SUBJECTS = "GradesSubjectsIsLowerThanCourseSubjects";
     private final Set<Grade> grades = new HashSet<>();
-    private Student student;
     private Registration registration;
 
     @BeforeEach

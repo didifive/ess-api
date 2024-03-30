@@ -1,9 +1,8 @@
 package me.didi.api.ess.services;
 
+import me.didi.api.ess.entities.Student;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.StudentRepository;
-import me.didi.api.ess.entities.Student;
-import me.didi.api.ess.services.StudentService;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

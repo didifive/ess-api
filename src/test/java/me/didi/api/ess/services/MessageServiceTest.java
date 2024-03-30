@@ -1,6 +1,5 @@
 package me.didi.api.ess.services;
 
-import me.didi.api.ess.entities.Course;
 import me.didi.api.ess.entities.Message;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.MessageRepository;
@@ -37,11 +36,11 @@ class MessageServiceTest {
         assertAll(
                 "Assert that Expected Message has been returned"
                 , () -> assertNotNull(result)
-                , () -> assertEquals(expected.getId(),          result.getId())
-                , () -> assertEquals(expected.getIcon(),        result.getIcon())
-                , () -> assertEquals(expected.getTitle(),       result.getTitle())
+                , () -> assertEquals(expected.getId(), result.getId())
+                , () -> assertEquals(expected.getIcon(), result.getIcon())
+                , () -> assertEquals(expected.getTitle(), result.getTitle())
                 , () -> assertEquals(expected.getDescription(), result.getDescription())
-                , () -> assertEquals(expected.getDateTime(),    result.getDateTime())
+                , () -> assertEquals(expected.getDateTime(), result.getDateTime())
         );
     }
 

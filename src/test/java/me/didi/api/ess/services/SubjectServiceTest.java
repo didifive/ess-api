@@ -1,9 +1,8 @@
 package me.didi.api.ess.services;
 
+import me.didi.api.ess.entities.Subject;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.SubjectRepository;
-import me.didi.api.ess.entities.Subject;
-import me.didi.api.ess.services.SubjectService;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,9 +36,9 @@ class SubjectServiceTest {
         assertAll(
                 "Assert that Expected Subject has been returned"
                 , () -> assertNotNull(result)
-                , () -> assertEquals(expected.getId(),          result.getId())
-                , () -> assertEquals(expected.getIcon(),        result.getIcon())
-                , () -> assertEquals(expected.getTitle(),       result.getTitle())
+                , () -> assertEquals(expected.getId(), result.getId())
+                , () -> assertEquals(expected.getIcon(), result.getIcon())
+                , () -> assertEquals(expected.getTitle(), result.getTitle())
                 , () -> assertEquals(expected.getDescription(), result.getDescription())
         );
     }
