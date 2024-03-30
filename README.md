@@ -223,6 +223,7 @@ classDiagram
     }
 
     class Message {
+        - LocalDateTime dateTime
     }
 
     class GradeId {

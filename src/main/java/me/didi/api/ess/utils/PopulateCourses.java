@@ -1,9 +1,9 @@
 package me.didi.api.ess.utils;
 
 
-import me.didi.api.ess.domain.enums.Frequency;
-import me.didi.api.ess.domain.services.CourseService;
-import me.didi.api.ess.resources.repositories.entities.Course;
+import me.didi.api.ess.enums.Frequency;
+import me.didi.api.ess.services.CourseService;
+import me.didi.api.ess.entities.Course;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

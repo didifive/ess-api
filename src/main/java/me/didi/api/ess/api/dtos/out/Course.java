@@ -1,7 +1,7 @@
 package me.didi.api.ess.api.dtos.out;
 
-import me.didi.api.ess.domain.enums.RegistrationStatus;
-import me.didi.api.ess.domain.enums.Frequency;
+import me.didi.api.ess.enums.RegistrationStatus;
+import me.didi.api.ess.enums.Frequency;
 
 public record Course(
         String name,

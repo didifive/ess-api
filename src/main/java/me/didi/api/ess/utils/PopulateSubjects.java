@@ -1,8 +1,8 @@
 package me.didi.api.ess.utils;
 
 
-import me.didi.api.ess.domain.services.SubjectService;
-import me.didi.api.ess.resources.repositories.entities.Subject;
+import me.didi.api.ess.services.SubjectService;
+import me.didi.api.ess.entities.Subject;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package me.didi.api.ess.utils;
 
 
-import me.didi.api.ess.domain.services.StudentService;
-import me.didi.api.ess.resources.repositories.entities.Student;
+import me.didi.api.ess.services.StudentService;
+import me.didi.api.ess.entities.Student;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
