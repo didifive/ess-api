@@ -140,10 +140,13 @@ class CourseServiceTest {
     void addMessageToCourse(Course course) {
         Message message = Instancio.create(Message.class);
 
+        when(messageService.save(message)).thenReturn(message);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
         courseService.addMessage(course.getId(), message);
 
+        verify(messageService).save(message);
+        verifyNoMoreInteractions(messageService);
         verify(repository).save(courseArgumentCaptor.capture());
         verifyNoMoreInteractions(repository);
 
@@ -178,10 +181,13 @@ class CourseServiceTest {
     void addNewsToCourse(Course course) {
         News news = Instancio.create(News.class);
 
+        when(newsService.save(news)).thenReturn(news);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
         courseService.addNews(course.getId(), news);
 
+        verify(newsService).save(news);
+        verifyNoMoreInteractions(newsService);
         verify(repository).save(courseArgumentCaptor.capture());
         verifyNoMoreInteractions(repository);
 
@@ -216,10 +222,13 @@ class CourseServiceTest {
     void addShortcutToCourse(Course course) {
         Shortcut shortcut = Instancio.create(Shortcut.class);
 
+        when(shortcutService.save(shortcut)).thenReturn(shortcut);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
         courseService.addShortcut(course.getId(), shortcut);
 
+        verify(shortcutService).save(shortcut);
+        verifyNoMoreInteractions(shortcutService);
         verify(repository).save(courseArgumentCaptor.capture());
         verifyNoMoreInteractions(repository);
 

@@ -1,8 +1,9 @@
 package me.didi.api.ess.services;
 
-import me.didi.api.ess.entities.Message;
+import me.didi.api.ess.entities.Shortcut;
+import me.didi.api.ess.entities.Shortcut;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
-import me.didi.api.ess.repositories.MessageRepository;
+import me.didi.api.ess.repositories.ShortcutRepository;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,65 +22,75 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Message Service Tests")
+@DisplayName("Shortcut Service Tests")
 @ExtendWith(MockitoExtension.class)
 class ShortcutServiceTest {
 
     @Mock
-    private MessageRepository repository;
+    private ShortcutRepository repository;
     @InjectMocks
-    private MessageService service;
+    private ShortcutService service;
 
-    private Message message;
+    private Shortcut shortcut;
 
-    private void assertMessage(Message expected, Message result) throws MultipleFailuresError {
+    private void assertShortcut(Shortcut expected, Shortcut result) throws MultipleFailuresError {
         assertAll(
-                "Assert that Expected Message has been returned"
+                "Assert that Expected Shortcut has been returned"
                 , () -> assertNotNull(result)
                 , () -> assertEquals(expected.getId(),          result.getId())
                 , () -> assertEquals(expected.getIcon(),        result.getIcon())
                 , () -> assertEquals(expected.getTitle(),       result.getTitle())
                 , () -> assertEquals(expected.getDescription(), result.getDescription())
-                , () -> assertEquals(expected.getDateTime(),    result.getDateTime())
+                , () -> assertEquals(expected.getLink(),        result.getLink())
         );
     }
 
     @BeforeEach
     void setup() {
-        message = Instancio.create(Message.class);
+        shortcut = Instancio.create(Shortcut.class);
     }
 
     @Test
-    @DisplayName("1. List Messagees")
+    @DisplayName("1. Save New Shortcut")
+    void saveNewShortcut() {
+        when(repository.save(any(Shortcut.class))).thenReturn(shortcut);
+
+        Shortcut result = service.save(shortcut);
+
+        assertShortcut(shortcut, result);
+    }
+    
+    @Test
+    @DisplayName("2. List Shortcuts")
     void findAll() {
-        when(repository.findAll()).thenReturn(List.of(message));
+        when(repository.findAll()).thenReturn(List.of(shortcut));
 
-        List<Message> result = service.findAll();
+        List<Shortcut> result = service.findAll();
 
-        assertAll("Assert that a list of the Messagees has been returned",
+        assertAll("Assert that a list of the Shortcutes has been returned",
                 () -> assertInstanceOf(List.class, result),
                 () -> assertEquals(1, result.size()),
-                () -> assertMessage(message, result.getFirst())
+                () -> assertShortcut(shortcut, result.getFirst())
         );
 
     }
 
     @Test
-    @DisplayName("2. Find Message by Id")
+    @DisplayName("3. Find Shortcut by Id")
     void findById() {
-        Message message = Instancio.create(Message.class);
+        Shortcut message = Instancio.create(Shortcut.class);
         String id = message.getId();
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(message));
 
-        Message result = service.findById(id);
+        Shortcut result = service.findById(id);
 
-        assertMessage(message, result);
+        assertShortcut(message, result);
 
     }
 
     @Test
-    @DisplayName("2.1. Throw Exception when try find Message with Invalid Id")
+    @DisplayName("3.1. Throw Exception when try find Shortcut with Invalid Id")
     void throwsExceptionWhenTryFindByInvalidId() {
         String invalidId = UUID.randomUUID().toString();
 
@@ -88,7 +99,7 @@ class ShortcutServiceTest {
         assertThrowsExceptionWithCorrectMessage(
                 () -> service.findById(invalidId),
                 EntityNotFoundException.class,
-                "Message with Id [" +
+                "Shortcut with Id [" +
                         invalidId +
                         "] Not Found!"
         );

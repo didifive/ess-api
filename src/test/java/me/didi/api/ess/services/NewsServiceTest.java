@@ -32,7 +32,7 @@ class NewsServiceTest {
 
     private News news;
 
-    private void assertMessage(News expected, News result) throws MultipleFailuresError {
+    private void assertNews(News expected, News result) throws MultipleFailuresError {
         assertAll(
                 "Assert that Expected News has been returned"
                 , () -> assertNotNull(result)
@@ -49,22 +49,32 @@ class NewsServiceTest {
     }
 
     @Test
-    @DisplayName("1. List Messagees")
+    @DisplayName("1. Save New News")
+    void saveNewNews() {
+        when(repository.save(any(News.class))).thenReturn(news);
+
+        News result = service.save(news);
+
+        assertNews(news, result);
+    }
+    
+    @Test
+    @DisplayName("2. List News")
     void findAll() {
         when(repository.findAll()).thenReturn(List.of(news));
 
         List<News> result = service.findAll();
 
-        assertAll("Assert that a list of the Messagees has been returned",
+        assertAll("Assert that a list of the Newses has been returned",
                 () -> assertInstanceOf(List.class, result),
                 () -> assertEquals(1, result.size()),
-                () -> assertMessage(news, result.getFirst())
+                () -> assertNews(news, result.getFirst())
         );
 
     }
 
     @Test
-    @DisplayName("2. Find News by Id")
+    @DisplayName("3. Find News by Id")
     void findById() {
         News news = Instancio.create(News.class);
         String id = news.getId();
@@ -73,12 +83,12 @@ class NewsServiceTest {
 
         News result = service.findById(id);
 
-        assertMessage(news, result);
+        assertNews(news, result);
 
     }
 
     @Test
-    @DisplayName("2.1. Throw Exception when try find News with Invalid Id")
+    @DisplayName("3.1. Throw Exception when try find News with Invalid Id")
     void throwsExceptionWhenTryFindByInvalidId() {
         String invalidId = UUID.randomUUID().toString();
 

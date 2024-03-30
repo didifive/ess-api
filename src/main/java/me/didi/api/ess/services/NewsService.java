@@ -1,5 +1,6 @@
 package me.didi.api.ess.services;
 
+import jakarta.transaction.Transactional;
 import me.didi.api.ess.entities.News;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.NewsRepository;
@@ -14,6 +15,11 @@ public class NewsService {
 
     public NewsService(NewsRepository repository) {
         this.repository = repository;
+    }
+
+    @Transactional
+    public News save(News news) {
+        return repository.save(news);
     }
 
     public List<News> findAll() {

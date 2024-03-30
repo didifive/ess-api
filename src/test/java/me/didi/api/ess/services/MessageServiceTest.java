@@ -1,5 +1,6 @@
 package me.didi.api.ess.services;
 
+import me.didi.api.ess.entities.Course;
 import me.didi.api.ess.entities.Message;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
 import me.didi.api.ess.repositories.MessageRepository;
@@ -50,7 +51,17 @@ class MessageServiceTest {
     }
 
     @Test
-    @DisplayName("1. List Messagees")
+    @DisplayName("1. Save New Message")
+    void saveNewMessage() {
+        when(repository.save(any(Message.class))).thenReturn(message);
+
+        Message result = service.save(message);
+
+        assertMessage(message, result);
+    }
+
+    @Test
+    @DisplayName("2. List Messagees")
     void findAll() {
         when(repository.findAll()).thenReturn(List.of(message));
 
@@ -65,7 +76,7 @@ class MessageServiceTest {
     }
 
     @Test
-    @DisplayName("2. Find Message by Id")
+    @DisplayName("3. Find Message by Id")
     void findById() {
         Message message = Instancio.create(Message.class);
         String id = message.getId();
@@ -79,7 +90,7 @@ class MessageServiceTest {
     }
 
     @Test
-    @DisplayName("2.1. Throw Exception when try find Message with Invalid Id")
+    @DisplayName("3.1. Throw Exception when try find Message with Invalid Id")
     void throwsExceptionWhenTryFindByInvalidId() {
         String invalidId = UUID.randomUUID().toString();
 

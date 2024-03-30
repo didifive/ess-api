@@ -10,27 +10,30 @@ import java.util.Set;
 
 @Entity(name = "course")
 public class Course extends BasicEntity implements Serializable {
-    @ManyToMany
+    private String name;
+    @Enumerated
+    private Frequency frequency;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "courses_messages",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "messages_id"))
-    Set<Message> messages;
-    @ManyToMany
+    private Set<Message> messages;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "courses_news",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "news_id"))
-    Set<News> news;
-    @ManyToMany
+    private Set<News> news;
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "courses_shortcuts",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "shortcut_id"))
-    Set<Shortcut> shortcuts;
-    private String name;
-    @Enumerated
-    private Frequency frequency;
+    private Set<Shortcut> shortcuts;
 
     public Course() {
     }

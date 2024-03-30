@@ -17,6 +17,11 @@ public class ShortcutService {
         this.repository = repository;
     }
 
+    @Transactional
+    public Shortcut save(Shortcut shortcut) {
+        return repository.save(shortcut);
+    }
+
     public List<Shortcut> findAll() {
         return repository.findAll();
     }

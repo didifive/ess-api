@@ -53,11 +53,11 @@ public class CourseService {
                 ? new HashSet<>()
                 : course.getMessages();
 
-        messages.add(message);
+        messages.add(messageService.save(message));
 
         course.setMessages(messages);
 
-        repository.save(course);
+        this.save(course);
     }
 
     public void removeMessage(String courseId, String messageId) {
@@ -73,21 +73,21 @@ public class CourseService {
 
         course.setMessages(messages);
 
-        repository.save(course);
+        this.save(course);
     }
 
     public void addNews(String courseId, News news) {
         Course course = this.findById(courseId);
 
-        Set<News> shortcuts = Objects.isNull(course.getNews())
+        Set<News> newsSet = Objects.isNull(course.getNews())
                 ? new HashSet<>()
                 : course.getNews();
 
-        shortcuts.add(news);
+        newsSet.add(newsService.save(news));
 
-        course.setNews(shortcuts);
+        course.setNews(newsSet);
 
-        repository.save(course);
+        this.save(course);
     }
 
     public void removeNews(String courseId, String shortcutId) {
@@ -113,7 +113,7 @@ public class CourseService {
                 ? new HashSet<>()
                 : course.getShortcuts();
 
-        shortcuts.add(shortcut);
+        shortcuts.add(shortcutService.save(shortcut));
 
         course.setShortcuts(shortcuts);
 

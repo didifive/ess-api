@@ -17,6 +17,11 @@ public class MessageService {
         this.repository = repository;
     }
 
+    @Transactional
+    public Message save(Message message) {
+        return repository.save(message);
+    }
+
     public List<Message> findAll() {
         return repository.findAll();
     }
