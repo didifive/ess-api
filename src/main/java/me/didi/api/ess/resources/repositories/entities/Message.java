@@ -9,10 +9,16 @@ public class Message extends BasicItem implements Serializable {
     public Message() {
     }
 
-    protected Message(String id,
+    public Message(String id,
                       String icon,
                       String title,
                       String description) {
         super(id, icon, title, description);
+    }
+
+    public Message(String icon,
+                String title,
+                String description) {
+        super(icon, title, description);
     }
 }

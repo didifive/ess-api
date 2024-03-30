@@ -9,10 +9,16 @@ public class News extends BasicItem implements Serializable {
     public News() {
     }
 
-    protected News(String id,
+    public News(String id,
                    String icon,
                    String title,
                    String description) {
         super(id, icon, title, description);
+    }
+
+    public News(String icon,
+                   String title,
+                   String description) {
+        super(icon, title, description);
     }
 }

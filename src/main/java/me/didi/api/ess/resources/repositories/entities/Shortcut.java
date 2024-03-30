@@ -22,6 +22,14 @@ public class Shortcut extends BasicItem implements Serializable {
         this.link = link;
     }
 
+    public Shortcut(String icon,
+                   String title,
+                   String description,
+                    String link) {
+        super(icon, title, description);
+        this.link = link;
+    }
+
     public String getLink() {
         return link;
     }

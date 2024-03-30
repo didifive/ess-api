@@ -24,6 +24,14 @@ public abstract class BasicItem extends BasicEntity {
         this.description = description;
     }
 
+    protected BasicItem(String icon,
+                        String title,
+                        String description) {
+        this.icon = icon;
+        this.title = title;
+        this.description = description;
+    }
+
     public String getIcon() {
         return icon;
     }

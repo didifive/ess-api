@@ -31,6 +31,8 @@ public class Populate implements CommandLineRunner {
             return 1;
         if (o instanceof PopulateClasses)
             return 2;
+        if (o instanceof PopulateSubjects)
+            return 3;
         else
             return 100;
     }
