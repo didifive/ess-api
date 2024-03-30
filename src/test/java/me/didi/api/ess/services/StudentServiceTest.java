@@ -78,7 +78,6 @@ class StudentServiceTest {
     @Test
     @DisplayName("3. Find Student by Id")
     void findById() {
-        Student student = Instancio.create(Student.class);
         String id = student.getId();
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(student));

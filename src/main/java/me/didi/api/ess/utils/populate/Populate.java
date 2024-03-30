@@ -1,4 +1,4 @@
-package me.didi.api.ess.utils;
+package me.didi.api.ess.utils.populate;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

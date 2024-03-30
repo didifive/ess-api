@@ -1,9 +1,8 @@
 package me.didi.api.ess.services;
 
+import me.didi.api.ess.entities.Message;
 import me.didi.api.ess.exceptions.EntityNotFoundException;
-import me.didi.api.ess.repositories.SubjectRepository;
-import me.didi.api.ess.entities.Subject;
-import me.didi.api.ess.services.SubjectService;
+import me.didi.api.ess.repositories.MessageRepository;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,73 +21,65 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Subject Service Tests")
+@DisplayName("Message Service Tests")
 @ExtendWith(MockitoExtension.class)
-class SubjectServiceTest {
+class ShortcutServiceTest {
 
     @Mock
-    private SubjectRepository repository;
+    private MessageRepository repository;
     @InjectMocks
-    private SubjectService service;
+    private MessageService service;
 
-    private Subject subject;
+    private Message message;
 
-    private void assertSubject(Subject expected, Subject result) throws MultipleFailuresError {
+    private void assertMessage(Message expected, Message result) throws MultipleFailuresError {
         assertAll(
-                "Assert that Expected Subject has been returned"
+                "Assert that Expected Message has been returned"
                 , () -> assertNotNull(result)
                 , () -> assertEquals(expected.getId(),          result.getId())
                 , () -> assertEquals(expected.getIcon(),        result.getIcon())
                 , () -> assertEquals(expected.getTitle(),       result.getTitle())
                 , () -> assertEquals(expected.getDescription(), result.getDescription())
+                , () -> assertEquals(expected.getDateTime(),    result.getDateTime())
         );
     }
 
     @BeforeEach
     void setup() {
-        subject = Instancio.create(Subject.class);
+        message = Instancio.create(Message.class);
     }
 
     @Test
-    @DisplayName("1. Save New Subject")
-    void saveNewSubject() {
-        when(repository.save(any(Subject.class))).thenReturn(subject);
-
-        Subject result = service.save(subject);
-
-        assertSubject(subject, result);
-    }
-
-    @Test
-    @DisplayName("2. List Subjectes")
+    @DisplayName("1. List Messagees")
     void findAll() {
-        when(repository.findAll()).thenReturn(List.of(subject));
+        when(repository.findAll()).thenReturn(List.of(message));
 
-        List<Subject> result = service.findAll();
+        List<Message> result = service.findAll();
 
-        assertAll("Assert that a list of the Subjectes has been returned",
+        assertAll("Assert that a list of the Messagees has been returned",
                 () -> assertInstanceOf(List.class, result),
                 () -> assertEquals(1, result.size()),
-                () -> assertSubject(subject, result.getFirst())
+                () -> assertMessage(message, result.getFirst())
         );
 
     }
 
     @Test
-    @DisplayName("3. Find Subject by Id")
+    @DisplayName("2. Find Message by Id")
     void findById() {
-        String id = subject.getId();
+        Message message = Instancio.create(Message.class);
+        String id = message.getId();
 
-        when(repository.findById(any(String.class))).thenReturn(Optional.of(subject));
+        when(repository.findById(any(String.class))).thenReturn(Optional.of(message));
 
-        Subject result = service.findById(id);
+        Message result = service.findById(id);
 
-        assertSubject(subject, result);
+        assertMessage(message, result);
 
     }
 
     @Test
-    @DisplayName("3.1. Throw Exception when try find Subject with Invalid Id")
+    @DisplayName("2.1. Throw Exception when try find Message with Invalid Id")
     void throwsExceptionWhenTryFindByInvalidId() {
         String invalidId = UUID.randomUUID().toString();
 
@@ -97,7 +88,7 @@ class SubjectServiceTest {
         assertThrowsExceptionWithCorrectMessage(
                 () -> service.findById(invalidId),
                 EntityNotFoundException.class,
-                "Subject with Id [" +
+                "Message with Id [" +
                         invalidId +
                         "] Not Found!"
         );

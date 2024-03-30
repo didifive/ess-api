@@ -76,7 +76,6 @@ class ClazzServiceTest {
     @Test
     @DisplayName("3. Find Class by Id")
     void findById() {
-        Clazz clazz = Instancio.create(Clazz.class);
         String id = clazz.getId();
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(clazz));
