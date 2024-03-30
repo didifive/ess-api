@@ -3,14 +3,13 @@ package me.didi.api.ess.resources.repositories.entities;
 import jakarta.persistence.Entity;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity(name = "subject")
 public class Subject extends BasicItem implements Serializable {
     public Subject() {
     }
 
-    protected Subject(UUID id,
+    protected Subject(String id,
                       String icon,
                       String title,
                       String description) {

@@ -6,7 +6,6 @@ import me.didi.api.ess.domain.enums.Frequency;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity(name = "course")
 public class Course extends BasicEntity implements Serializable {
@@ -31,9 +30,11 @@ public class Course extends BasicEntity implements Serializable {
     private String name;
     @Enumerated
     private Frequency frequency;
+
     public Course() {
     }
-    public Course(UUID id,
+
+    public Course(String id,
                   String name,
                   Frequency frequency,
                   Set<Message> messages,
@@ -45,6 +46,12 @@ public class Course extends BasicEntity implements Serializable {
         this.messages = messages;
         this.news = news;
         this.shortcuts = shortcuts;
+    }
+
+    public Course(String name,
+                  Frequency frequency) {
+        this.name = name;
+        this.frequency = frequency;
     }
 
     public String getName() {

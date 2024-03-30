@@ -3,7 +3,6 @@ package me.didi.api.ess.resources.repositories.entities;
 import jakarta.persistence.MappedSuperclass;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BasicItem extends BasicEntity {
@@ -15,7 +14,7 @@ public abstract class BasicItem extends BasicEntity {
     protected BasicItem() {
     }
 
-    protected BasicItem(UUID id,
+    protected BasicItem(String id,
                         String icon,
                         String title,
                         String description) {

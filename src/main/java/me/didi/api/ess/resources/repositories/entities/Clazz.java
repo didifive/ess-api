@@ -1,25 +1,29 @@
 package me.didi.api.ess.resources.repositories.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity(name = "class")
 public class Clazz extends BasicEntity {
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "course_id")
     private Course course;
 
     public Clazz() {
     }
-    public Clazz(UUID id,
+
+    public Clazz(String id,
                  String name,
                  Course course) {
         super(id);
+        this.name = name;
+        this.course = course;
+    }
+
+    public Clazz(String name,
+                 Course course) {
         this.name = name;
         this.course = course;
     }

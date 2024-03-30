@@ -79,9 +79,9 @@ class StudentServiceTest {
     @DisplayName("3. Find Student by Id")
     void findById() {
         Student student = Instancio.create(Student.class);
-        String id = student.getId().toString();
+        String id = student.getId();
 
-        when(repository.findById(any(UUID.class))).thenReturn(Optional.of(student));
+        when(repository.findById(any(String.class))).thenReturn(Optional.of(student));
 
         Student result = service.findById(id);
 
@@ -94,7 +94,7 @@ class StudentServiceTest {
     void throwsExceptionWhenTryFindByInvalidId() {
         String invalidId = UUID.randomUUID().toString();
 
-        when(repository.findById(any(UUID.class))).thenReturn(Optional.empty());
+        when(repository.findById(any(String.class))).thenReturn(Optional.empty());
 
         assertThrowsExceptionWithCorrectMessage(
                 () -> service.findById(invalidId),

@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity(name = "shorcut")
 public class Shortcut extends BasicItem implements Serializable {
@@ -14,7 +13,7 @@ public class Shortcut extends BasicItem implements Serializable {
     public Shortcut() {
     }
 
-    public Shortcut(UUID id,
+    public Shortcut(String id,
                     String icon,
                     String title,
                     String description,

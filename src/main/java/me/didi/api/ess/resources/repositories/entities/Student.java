@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity(name = "student")
 public class Student extends BasicEntity implements Serializable {
@@ -16,12 +15,22 @@ public class Student extends BasicEntity implements Serializable {
     public Student() {
     }
 
-    public Student(UUID id,
+    public Student(String id,
                    String givenName,
                    String familyName,
                    String guardian,
                    String photo) {
         super(id);
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.guardian = guardian;
+        this.photo = photo;
+    }
+
+    public Student(String givenName,
+                   String familyName,
+                   String guardian,
+                   String photo) {
         this.givenName = givenName;
         this.familyName = familyName;
         this.guardian = guardian;

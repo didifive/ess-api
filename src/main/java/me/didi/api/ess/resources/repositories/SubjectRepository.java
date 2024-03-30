@@ -4,8 +4,6 @@ import me.didi.api.ess.resources.repositories.entities.Shortcut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface SubjectRepository extends JpaRepository<Shortcut, UUID> {
+public interface SubjectRepository extends JpaRepository<Shortcut, String> {
 }

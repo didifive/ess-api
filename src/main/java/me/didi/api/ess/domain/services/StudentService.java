@@ -1,12 +1,12 @@
 package me.didi.api.ess.domain.services;
 
+import jakarta.transaction.Transactional;
+import me.didi.api.ess.domain.exceptions.EntityNotFoundException;
 import me.didi.api.ess.resources.repositories.StudentRepository;
 import me.didi.api.ess.resources.repositories.entities.Student;
-import me.didi.api.ess.domain.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class StudentService {
@@ -18,6 +18,7 @@ public class StudentService {
     }
 
 
+    @Transactional
     public Student save(Student student) {
         return repository.save(student);
     }
@@ -27,8 +28,7 @@ public class StudentService {
     }
 
     public Student findById(String id) {
-        UUID studentId = UUID.fromString(id);
-        return repository.findById(studentId).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Student with Id [" +
                         id +
                         "] Not Found!"));

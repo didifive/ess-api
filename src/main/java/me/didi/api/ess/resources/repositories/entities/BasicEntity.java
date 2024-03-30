@@ -1,31 +1,30 @@
 package me.didi.api.ess.resources.repositories.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BasicEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @UuidGenerator
+    private String id;
 
-    protected BasicEntity() { }
+    protected BasicEntity() {
+    }
 
-    protected BasicEntity(UUID id) {
+    protected BasicEntity(String id) {
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
