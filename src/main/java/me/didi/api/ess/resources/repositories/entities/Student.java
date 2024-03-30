@@ -72,4 +72,15 @@ public class Student extends BasicEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(getGivenName(), getFamilyName(), getGuardian(), getPhoto());
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + getId() + '\'' +
+                "givenName='" + givenName + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", guardian='" + guardian + '\'' +
+                ", photo='" + photo + '\'' +
+                '}';
+    }
 }
