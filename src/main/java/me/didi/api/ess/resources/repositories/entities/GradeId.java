@@ -1,8 +1,6 @@
 package me.didi.api.ess.resources.repositories.entities;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Enumerated;
-import me.didi.api.ess.domain.enums.GradeType;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,42 +8,35 @@ import java.util.Objects;
 @Embeddable
 public class GradeId implements Serializable {
 
-    private String student;
-    private String course;
-    private String subject;
-    @Enumerated
-    private GradeType type;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
+    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
+    private Registration registration;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
-    public String getStudent() {
-        return student;
-    }
+    public GradeId() {}
 
-    public void setStudent(String student) {
-        this.student = student;
-    }
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
+    public GradeId(Registration registration, Subject subject) {
+        this.registration = registration;
         this.subject = subject;
     }
 
-    public GradeType getType() {
-        return type;
+    public Registration getRegistration() {
+        return registration;
     }
 
-    public void setType(GradeType type) {
-        this.type = type;
+    public void setRegistration(Registration registration) {
+        this.registration = registration;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     @Override
@@ -53,11 +44,11 @@ public class GradeId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GradeId gradeId = (GradeId) o;
-        return Objects.equals(getStudent(), gradeId.getStudent()) && Objects.equals(getCourse(), gradeId.getCourse()) && Objects.equals(getSubject(), gradeId.getSubject()) && getType() == gradeId.getType();
+        return Objects.equals(getRegistration(), gradeId.getRegistration()) && Objects.equals(getSubject(), gradeId.getSubject());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStudent(), getCourse(), getSubject(), getType());
+        return Objects.hash(getRegistration(), getSubject());
     }
 }

@@ -1,48 +1,47 @@
 package me.didi.api.ess.resources.repositories.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
+import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
-@Entity(name="student")
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    private String name;
+@Entity(name = "student")
+public class Student extends BasicEntity implements Serializable {
+    private String givenName;
+    private String familyName;
     private String guardian;
     private String photo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "students_courses",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    Set<Course> courses;
-
-    @ManyToMany
-    @JoinTable(
-            name = "students_messages",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "messages_id"))
-    Set<Message> messages;
-
-    public UUID getId() {
-        return id;
+    public Student() {
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public Student(UUID id,
+                   String givenName,
+                   String familyName,
+                   String guardian,
+                   String photo) {
+        super(id);
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.guardian = guardian;
+        this.photo = photo;
     }
 
-    public String getName() {
-        return name;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
     public String getGuardian() {
@@ -61,32 +60,16 @@ public class Student {
         this.photo = photo;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(getId(), student.getId()) && Objects.equals(getName(), student.getName()) && Objects.equals(getGuardian(), student.getGuardian()) && Objects.equals(getPhoto(), student.getPhoto());
+        return Objects.equals(getGivenName(), student.getGivenName()) && Objects.equals(getFamilyName(), student.getFamilyName()) && Objects.equals(getGuardian(), student.getGuardian()) && Objects.equals(getPhoto(), student.getPhoto());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getGuardian(), getPhoto());
+        return Objects.hash(getGivenName(), getFamilyName(), getGuardian(), getPhoto());
     }
 }

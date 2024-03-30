@@ -1,36 +1,26 @@
 package me.didi.api.ess.resources.repositories.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
+import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
-@Entity(name="shorcut")
-public class Shortcut {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    private String name;
+@Entity(name = "shorcut")
+public class Shortcut extends BasicItem implements Serializable {
+
     private String link;
 
-    @ManyToMany(mappedBy = "shortcuts")
-    Set<Course> courses;
-
-    public UUID getId() {
-        return id;
+    public Shortcut() {
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Shortcut(UUID id,
+                    String icon,
+                    String title,
+                    String description,
+                    String link) {
+        super(id, icon, title, description);
+        this.link = link;
     }
 
     public String getLink() {
@@ -41,24 +31,19 @@ public class Shortcut {
         this.link = link;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Shortcut shortcut = (Shortcut) o;
-        return Objects.equals(getName(), shortcut.getName()) && Objects.equals(getLink(), shortcut.getLink());
+        return Objects.equals(getIcon(), shortcut.getIcon())
+                && Objects.equals(getTitle(), shortcut.getTitle())
+                && Objects.equals(getLink(), shortcut.getLink());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getLink());
+        return Objects.hash(getTitle(), getIcon(), getLink());
     }
 }

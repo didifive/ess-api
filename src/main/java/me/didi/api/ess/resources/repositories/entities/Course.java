@@ -3,57 +3,48 @@ package me.didi.api.ess.resources.repositories.entities;
 import jakarta.persistence.*;
 import me.didi.api.ess.domain.enums.Frequency;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name="course")
-public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    private String name;
-    @Enumerated
-    private Frequency frequency;
-    private String period;
-
-    @ManyToMany(mappedBy = "courses")
-    Set<Student> students;
-
-    @ManyToMany
-    @JoinTable(
-            name = "courses_subjects",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    Set<Subject> subjects;
-
+@Entity(name = "course")
+public class Course extends BasicEntity implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "courses_messages",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "messages_id"))
     Set<Message> messages;
-
     @ManyToMany
     @JoinTable(
             name = "courses_news",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "news_id"))
-    Set<Subject> news;
-
+    Set<News> news;
     @ManyToMany
     @JoinTable(
             name = "courses_shortcuts",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "shortcut_id"))
     Set<Shortcut> shortcuts;
-
-    public UUID getId() {
-        return id;
+    private String name;
+    @Enumerated
+    private Frequency frequency;
+    public Course() {
     }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public Course(UUID id,
+                  String name,
+                  Frequency frequency,
+                  Set<Message> messages,
+                  Set<News> news,
+                  Set<Shortcut> shortcuts) {
+        super(id);
+        this.name = name;
+        this.frequency = frequency;
+        this.messages = messages;
+        this.news = news;
+        this.shortcuts = shortcuts;
     }
 
     public String getName() {
@@ -72,30 +63,6 @@ public class Course {
         this.frequency = frequency;
     }
 
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
     public Set<Message> getMessages() {
         return messages;
     }
@@ -104,11 +71,11 @@ public class Course {
         this.messages = messages;
     }
 
-    public Set<Subject> getNews() {
+    public Set<News> getNews() {
         return news;
     }
 
-    public void setNews(Set<Subject> news) {
+    public void setNews(Set<News> news) {
         this.news = news;
     }
 
@@ -125,11 +92,11 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(getName(), course.getName()) && getFrequency() == course.getFrequency() && Objects.equals(getPeriod(), course.getPeriod());
+        return Objects.equals(getName(), course.getName()) && getFrequency() == course.getFrequency();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getFrequency(), getPeriod());
+        return Objects.hash(getName(), getFrequency());
     }
 }
