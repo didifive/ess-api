@@ -46,7 +46,7 @@ public class CourseService {
                         "] Not Found!"));
     }
 
-    public Message addMessage(String courseId, Message message) {
+    public String addMessage(String courseId, Message message) {
         Course course = this.findById(courseId);
 
         Set<Message> messages = Objects.isNull(course.getMessages())
@@ -61,7 +61,7 @@ public class CourseService {
 
         this.save(course);
 
-        return newMessage;
+        return newMessage.getId();
     }
 
     public void removeMessage(String courseId, String messageId) {
@@ -80,7 +80,7 @@ public class CourseService {
         this.save(course);
     }
 
-    public News addNews(String courseId, News news) {
+    public String addNews(String courseId, News news) {
         Course course = this.findById(courseId);
 
         Set<News> newsSet = Objects.isNull(course.getNews())
@@ -95,7 +95,7 @@ public class CourseService {
 
         this.save(course);
 
-        return newNews;
+        return newNews.getId();
     }
 
     public void removeNews(String courseId, String shortcutId) {
@@ -114,7 +114,7 @@ public class CourseService {
         repository.save(course);
     }
 
-    public Shortcut addShortcut(String courseId, Shortcut shortcut) {
+    public String addShortcut(String courseId, Shortcut shortcut) {
         Course course = this.findById(courseId);
 
         Set<Shortcut> shortcuts = Objects.isNull(course.getShortcuts())
@@ -129,7 +129,7 @@ public class CourseService {
 
         repository.save(course);
 
-        return newShortcut;
+        return newShortcut.getId();
     }
 
     public void removeShortcut(String courseId, String shortcutId) {

@@ -77,7 +77,7 @@ public class CourseController {
         }
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/message/{id}")
-                .buildAndExpand(courseService.addMessage(id, MessageRequestDTO.toEntity(dto)).getId()).toUri();
+                .buildAndExpand(courseService.addMessage(id, MessageRequestDTO.toEntity(dto))).toUri();
 
         return ResponseEntity.created(uri).build();
     }
@@ -106,7 +106,7 @@ public class CourseController {
         }
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/news/{id}")
-                .buildAndExpand(courseService.addNews(id, NewsRequestDTO.toEntity(dto)).getId()).toUri();
+                .buildAndExpand(courseService.addNews(id, NewsRequestDTO.toEntity(dto))).toUri();
 
         return ResponseEntity.created(uri).build();
     }
@@ -135,7 +135,7 @@ public class CourseController {
         }
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/shortcut/{id}")
-                .buildAndExpand(courseService.addShortcut(id, ShortcutRequestDTO.toEntity(dto)).getId()).toUri();
+                .buildAndExpand(courseService.addShortcut(id, ShortcutRequestDTO.toEntity(dto))).toUri();
 
         return ResponseEntity.created(uri).build();
     }

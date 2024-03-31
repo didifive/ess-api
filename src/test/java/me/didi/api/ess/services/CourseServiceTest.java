@@ -143,7 +143,7 @@ class CourseServiceTest {
         when(messageService.save(message)).thenReturn(message);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
-        courseService.addMessage(course.getId(), message);
+        String result = courseService.addMessage(course.getId(), message);
 
         verify(messageService).save(message);
         verifyNoMoreInteractions(messageService);
@@ -151,6 +151,7 @@ class CourseServiceTest {
         verifyNoMoreInteractions(repository);
 
         assertTrue(courseArgumentCaptor.getValue().getMessages().contains(message));
+        assertEquals(message.getId(),result);
     }
 
     @ParameterizedTest
@@ -184,7 +185,7 @@ class CourseServiceTest {
         when(newsService.save(news)).thenReturn(news);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
-        courseService.addNews(course.getId(), news);
+        String result = courseService.addNews(course.getId(), news);
 
         verify(newsService).save(news);
         verifyNoMoreInteractions(newsService);
@@ -192,6 +193,7 @@ class CourseServiceTest {
         verifyNoMoreInteractions(repository);
 
         assertTrue(courseArgumentCaptor.getValue().getNews().contains(news));
+        assertEquals(news.getId(), result);
     }
 
     @ParameterizedTest
@@ -225,7 +227,7 @@ class CourseServiceTest {
         when(shortcutService.save(shortcut)).thenReturn(shortcut);
         when(repository.findById(course.getId())).thenReturn(Optional.of(course));
 
-        courseService.addShortcut(course.getId(), shortcut);
+        String result = courseService.addShortcut(course.getId(), shortcut);
 
         verify(shortcutService).save(shortcut);
         verifyNoMoreInteractions(shortcutService);
@@ -233,6 +235,7 @@ class CourseServiceTest {
         verifyNoMoreInteractions(repository);
 
         assertTrue(courseArgumentCaptor.getValue().getShortcuts().contains(shortcut));
+        assertEquals(shortcut.getId(), result);
     }
 
     @ParameterizedTest
