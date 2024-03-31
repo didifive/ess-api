@@ -13,6 +13,14 @@ RESTful Desenvolvimento da API para projeto do bootcamp Java AI Powered da DIO.
 
 Construída com Java 21 e Spring Boot 3.2.3.
 
+## 🎯 Objetivo 
+Este é um projeto de API criado a partir de desafio de projeto do bootcamp Java AI Powered da DIO.  
+Adicionalmente foi pensado em solução que pode atender uma situação problema real para cadastro de estudantes
+e cursos.  
+Aqui foram abordadas as etapas:  
+- Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
+- Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
+
 ## Principais tecnologias
 - **Java 21**: Versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
 - **Spring Boot 3**: Versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
@@ -296,6 +304,27 @@ Swagger
 Jacoco Report  
 [TODO]
 
-## ⚙ Como executar o projeto
+## ✔️ Testes
+
+Os testes foram feitos utilizando o [JUnit 5] e Mockito.
+
+- Para executar os testes pode executar sua IDE ou
+- Utilizando o terminal (PowerShell, Bash ou similiar), basta executar na pasta do projeto o comando abaixo:
+
+    ```shell
+    ./mvnw clean test
+    ```
+
+_Após o teste finalizado com sucesso, é possível verificar relatório de coverage em: target/site/jacoco/index.html_
+
+
+## ⚙ Executando o projeto localmente
+
+Antes de mais nada, é preciso possuir o JDK do Java 21 para conseguir executar.
+
+### 👪 Populate
+Para popular dados automaticamente foram criadas classes que executam ao iniciar a aplicação, assim a aplicação já inicia com dados básicos para gets.   
+As classes estão no pacote `me.didi.api.ess.utils.populate`.
+
 
 [Mermaid]: https://mermaid.js.org/

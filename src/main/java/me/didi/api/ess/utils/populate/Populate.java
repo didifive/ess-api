@@ -35,8 +35,6 @@ public class Populate implements CommandLineRunner {
             return 3;
         if (o instanceof PopulateRegistrations)
             return 4;
-        if (o instanceof PopulateGrades)
-            return 5;
 
         return 100;
     }

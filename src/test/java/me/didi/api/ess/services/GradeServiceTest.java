@@ -12,6 +12,9 @@ import me.didi.api.ess.repositories.GradeRepository;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +24,7 @@ import org.opentest4j.MultipleFailuresError;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static me.didi.api.ess.utils.Assertions.assertThrowsExceptionWithCorrectMessage;
 import static org.instancio.Select.field;
@@ -46,6 +50,14 @@ class GradeServiceTest {
     private Grade grade;
     private ArgumentCaptor<Grade> gradeArgumentCaptor;
 
+    private static Stream<Arguments> providedGrades() {
+        return Stream.of(
+                Arguments.of(GradeType.FINAL, GradeType.FINAL),
+                Arguments.of(GradeType.PARTIAL, GradeType.PARTIAL),
+                Arguments.of(GradeType.PARTIAL, GradeType.FINAL)
+        );
+    }
+
     private void assertGrade(Grade expected, Grade result) throws MultipleFailuresError {
         assertAll(
                 "Assert that Expected Grade has been returned"
@@ -64,6 +76,7 @@ class GradeServiceTest {
         GradeId gradeId = new GradeId(registration, subject);
         grade = Instancio.of(Grade.class)
                 .set(field("id"), gradeId)
+                .set(field("gradeType"), GradeType.FINAL)
                 .create();
         gradeArgumentCaptor = ArgumentCaptor.forClass(Grade.class);
     }
@@ -231,6 +244,44 @@ class GradeServiceTest {
         verify(service).findById(studentId, classId, subjectId);
         verifyNoMoreInteractions(service);
         verifyNoInteractions(repository);
+    }
+
+    @ParameterizedTest
+    @MethodSource("providedGrades")
+    @DisplayName("1.5. Save New Grade Even If Existing Grade And Validate Grade Level Not Throws Exception")
+    void saveNewGradeEvenIfExistingGradeHasFinalGradeWhenActualGradeHasFinalGradeToo(
+            GradeType existingGradeType, GradeType actualGradeType) {
+        String studentId = grade.getId().getRegistration().getId().getStudent().getId();
+        String classId = grade.getId().getRegistration().getId().getClazz().getId();
+        String subjectId = grade.getId().getSubject().getId();
+
+        Grade existingGrade = Instancio.of(Grade.class)
+                .set(field("id"), grade.getId())
+                .set(field("gradeType"), existingGradeType)
+                .create();
+
+        grade.setGradeType(actualGradeType);
+
+        when(registrationService.findById(studentId, classId))
+                .thenReturn(grade.getId().getRegistration());
+        when(subjectService.findById(subjectId))
+                .thenReturn(grade.getId().getSubject());
+        doReturn(existingGrade).when(service).findById(studentId, classId, subjectId);
+        when(repository.save(any(Grade.class))).thenReturn(grade);
+
+        Grade result = service.save(grade);
+
+        verify(registrationService).findById(studentId, classId);
+        verifyNoMoreInteractions(registrationService);
+        verify(subjectService).findById(subjectId);
+        verifyNoMoreInteractions(subjectService);
+        verify(repository).save(grade);
+        verifyNoMoreInteractions(repository);
+        verify(service).findById(studentId, classId, subjectId);
+        verify(service).save(grade);
+        verifyNoMoreInteractions(service);
+
+        assertGrade(grade, result);
     }
 
     @Test
