@@ -1,4 +1,4 @@
-package me.didi.api.ess.api.dtos.out;
+package me.didi.api.ess.dtos.out;
 
 import java.util.List;
 
