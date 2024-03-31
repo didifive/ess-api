@@ -189,6 +189,9 @@ classDiagram
     class Clazz {
         - String name
         - Course course
+        - LocalDate initDate
+        - LocalDate recoveryDate
+        - LocalDate endDate
     }
 
     class RegistrationId {
@@ -199,9 +202,7 @@ classDiagram
     class Registration {
         - RegistrationId id
         - Set~Subject~ subjects
-        - LocalDateTime registrationDate
-        - LocalDate recoveryDate
-        - LocalDate endDate
+        - LocalDate registrationDate
         + RegistrationStatus status()
     }
 
@@ -277,5 +278,22 @@ classDiagram
 ``` 
 
 O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, este não era necessariamente o domínio central, existe uma dependência forte com **Curso**, **Turma** e **Matrícula** para ter a relação do estudante com as matérias e notas.
+
+## 📷 Prints do Projeto
+
+Logotipo do produto ESS Escola Shining Star  
+![ESS Logo](docs/ess/logo.png?raw=true "ESS Logo")  
+  
+Banner do Spring personalizado  
+![ESS Custom Spring Banner](docs/banner.PNG?raw=true "ESS Custom Spring Banner")  
+
+Console do H2 (banco de dados) mostrando as tabelas criadas e os dados de uma tabela de relação de muitos para muitos que relaciona o Estudante, a Turma e a Matéria matriculada   
+![H2 Console Tables and some Tuples](docs/banner.PNG?raw=true "H2 Console Tables and some Tuples")
+
+Swagger  
+[TODO]  
+
+
+## ⚙ Como executar o projeto
 
 [Mermaid]: https://mermaid.js.org/
