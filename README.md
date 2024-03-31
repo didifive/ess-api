@@ -306,7 +306,7 @@ Jacoco Report
 
 ## ✔️ Testes
 
-Os testes foram feitos utilizando o [JUnit 5] e Mockito.
+Os testes foram feitos utilizando o [JUnit 5], Mockito e MockMVC.
 
 - Para executar os testes pode executar sua IDE ou
 - Utilizando o terminal (PowerShell, Bash ou similiar), basta executar na pasta do projeto o comando abaixo:
