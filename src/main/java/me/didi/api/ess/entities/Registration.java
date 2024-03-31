@@ -34,7 +34,11 @@ public class Registration implements Serializable {
     public Registration(Student student,
                         Clazz clazz,
                         Set<Subject> subjects) {
-        this.id = new RegistrationId(student, clazz);
+        RegistrationId registrationId = new RegistrationId();
+        registrationId.setStudent(student);
+        registrationId.setClazz(clazz);
+
+        this.id = registrationId;
         this.subjects = subjects;
         this.registrationDate = LocalDate.now();
     }

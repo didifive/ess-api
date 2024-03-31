@@ -52,7 +52,9 @@ public class RegistrationService {
     public Registration findById(String studentId, String classId) {
         Student student = studentService.findById(studentId);
         Clazz clazz = clazzService.findById(classId);
-        RegistrationId registrationId = new RegistrationId(student, clazz);
+        RegistrationId registrationId = new RegistrationId();
+        registrationId.setStudent(student);
+        registrationId.setClazz(clazz);
 
         return repository.findById(registrationId).orElseThrow(
                 () -> new EntityNotFoundException("Registration with Id [" +

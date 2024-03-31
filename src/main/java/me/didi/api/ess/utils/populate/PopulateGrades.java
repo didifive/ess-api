@@ -4,7 +4,6 @@ package me.didi.api.ess.utils.populate;
 import me.didi.api.ess.entities.Grade;
 import me.didi.api.ess.entities.Registration;
 import me.didi.api.ess.entities.Subject;
-import me.didi.api.ess.entities.pks.GradeId;
 import me.didi.api.ess.enums.GradeType;
 import me.didi.api.ess.services.GradeService;
 import me.didi.api.ess.services.RegistrationService;
@@ -41,34 +40,29 @@ public class PopulateGrades implements PopulateData {
 
         List<Grade> grades = List.of(
                 new Grade(
-                        new GradeId(
-                                registration,
-                                subjects.getFirst()),
+                        registration,
+                        subjects.getFirst(),
                         GradeType.FINAL,
                         BigDecimal.valueOf(7.1d)
                 ),
                 new Grade(
-                        new GradeId(
-                                registration,
-                                subjects.get(1)),
+                        registration,
+                        subjects.get(1),
                         GradeType.PARTIAL,
                         BigDecimal.valueOf(10d)
                 ), new Grade(
-                        new GradeId(
-                                registration,
-                                subjects.get(2)),
+                        registration,
+                        subjects.get(2),
                         GradeType.PARTIAL,
                         BigDecimal.valueOf(10d)
                 ), new Grade(
-                        new GradeId(
-                                registration,
-                                subjects.get(3)),
+                        registration,
+                        subjects.get(3),
                         GradeType.PARTIAL,
                         BigDecimal.valueOf(5d)
                 ), new Grade(
-                        new GradeId(
-                                registration,
-                                subjects.getLast()),
+                        registration,
+                        subjects.getLast(),
                         GradeType.ONGOING,
                         BigDecimal.valueOf(0)
                 ));

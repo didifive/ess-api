@@ -23,8 +23,12 @@ public class Grade implements Serializable {
 
     public Grade() {}
 
-    public Grade (GradeId id, GradeType gradeType, BigDecimal value) {
-        this.id = id;
+    public Grade (Registration registration, Subject subject, GradeType gradeType, BigDecimal value) {
+        GradeId gradeId = new GradeId();
+        gradeId.setRegistration(registration);
+        gradeId.setSubject(subject);
+
+        this.id = gradeId;
         this.gradeType = gradeType;
         this.value = value;
     }

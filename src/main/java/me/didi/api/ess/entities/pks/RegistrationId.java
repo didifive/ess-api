@@ -18,14 +18,6 @@ public class RegistrationId implements Serializable {
     @JoinColumn(name = "class_id")
     private Clazz clazz;
 
-    public RegistrationId() {
-    }
-
-    public RegistrationId(Student student, Clazz clazz) {
-        this.student = student;
-        this.clazz = clazz;
-    }
-
     public Student getStudent() {
         return student;
     }
@@ -53,13 +45,5 @@ public class RegistrationId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getStudent(), getClazz());
-    }
-
-    @Override
-    public String toString() {
-        return "RegistrationId{" +
-                "studentId=" + student.getId() +
-                ", clazzId=" + clazz.getId() +
-                '}';
     }
 }

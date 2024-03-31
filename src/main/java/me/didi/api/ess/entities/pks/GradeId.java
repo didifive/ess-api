@@ -18,13 +18,6 @@ public class GradeId implements Serializable {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    public GradeId() {}
-
-    public GradeId(Registration registration, Subject subject) {
-        this.registration = registration;
-        this.subject = subject;
-    }
-
     public Registration getRegistration() {
         return registration;
     }
@@ -52,13 +45,5 @@ public class GradeId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getRegistration(), getSubject());
-    }
-
-    @Override
-    public String toString() {
-        return "GradeId{" +
-                "registration=" + registration +
-                ", subject=" + subject +
-                '}';
     }
 }

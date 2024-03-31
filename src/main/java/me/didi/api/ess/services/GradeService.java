@@ -79,7 +79,9 @@ public class GradeService {
     public Grade findById(String studentId, String classId, String subjectId) {
         Registration registration = registrationService.findById(studentId, classId);
         Subject subject = subjectService.findById(subjectId);
-        GradeId gradeId = new GradeId(registration, subject);
+        GradeId gradeId = new GradeId();
+        gradeId.setRegistration(registration);
+        gradeId.setSubject(subject);
 
         return repository.findById(gradeId).orElseThrow(
                 () -> new EntityNotFoundException("Grade with Id [" +

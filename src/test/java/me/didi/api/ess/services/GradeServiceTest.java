@@ -73,7 +73,9 @@ class GradeServiceTest {
         Registration registration = Instancio.create(Registration.class);
         Subject subject = Instancio.create(Subject.class);
         registration.getSubjects().add(subject);
-        GradeId gradeId = new GradeId(registration, subject);
+        GradeId gradeId = new GradeId();
+        gradeId.setRegistration(registration);
+        gradeId.setSubject(subject);
         grade = Instancio.of(Grade.class)
                 .set(field("id"), gradeId)
                 .set(field("gradeType"), GradeType.FINAL)

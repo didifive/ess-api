@@ -57,24 +57,24 @@ class RegistrationTest {
         subjects.forEach(subject -> {
             if (info.getTags().stream().anyMatch(t -> t.equals(HAS_ONGOING_GRADE))) {
                 if (grades.stream().anyMatch(g -> g.getGradeType().equals(GradeType.ONGOING))) {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.FINAL, new BigDecimal(10)));
+                    grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(10)));
                 } else {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.ONGOING, new BigDecimal(0)));
+                    grades.add(new Grade(registration, subject, GradeType.ONGOING, new BigDecimal(0)));
                 }
             } else if (info.getTags().stream().anyMatch(t -> t.equals(HAS_PARTIAL_GRADE))) {
                 if (grades.stream().anyMatch(g -> g.getGradeType().equals(GradeType.PARTIAL))) {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.FINAL, new BigDecimal(10)));
+                    grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(10)));
                 } else {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.PARTIAL, new BigDecimal(0)));
+                    grades.add(new Grade(registration, subject, GradeType.PARTIAL, new BigDecimal(0)));
                 }
             } else if (info.getTags().stream().anyMatch(t -> t.equals(NO_PASSING_SCORE))) {
                 if (grades.stream().anyMatch(g -> g.getValue().compareTo(PASSING_SCORE) < 0)) {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.FINAL, new BigDecimal(10)));
+                    grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(10)));
                 } else {
-                    grades.add(new Grade(new GradeId(registration, subject), GradeType.FINAL, new BigDecimal(5)));
+                    grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(5)));
                 }
             } else {
-                grades.add(new Grade(new GradeId(registration, subject), GradeType.FINAL, new BigDecimal(10)));
+                grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(10)));
             }
 
         });
