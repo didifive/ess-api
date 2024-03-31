@@ -293,6 +293,8 @@ Console do H2 (banco de dados) mostrando as tabelas criadas e os dados de uma ta
 Swagger  
 [TODO]  
 
+Jacoco Report  
+[TODO]
 
 ## ⚙ Como executar o projeto
 

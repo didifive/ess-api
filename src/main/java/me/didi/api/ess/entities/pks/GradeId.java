@@ -53,4 +53,12 @@ public class GradeId implements Serializable {
     public int hashCode() {
         return Objects.hash(getRegistration(), getSubject());
     }
+
+    @Override
+    public String toString() {
+        return "GradeId{" +
+                "registration=" + registration +
+                ", subject=" + subject +
+                '}';
+    }
 }
