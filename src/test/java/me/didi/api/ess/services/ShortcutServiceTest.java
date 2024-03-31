@@ -77,14 +77,13 @@ class ShortcutServiceTest {
     @Test
     @DisplayName("3. Find Shortcut by Id")
     void findById() {
-        Shortcut message = Instancio.create(Shortcut.class);
-        String id = message.getId();
+        String id = shortcut.getId();
 
-        when(repository.findById(any(String.class))).thenReturn(Optional.of(message));
+        when(repository.findById(any(String.class))).thenReturn(Optional.of(shortcut));
 
         Shortcut result = service.findById(id);
 
-        assertShortcut(message, result);
+        assertShortcut(shortcut, result);
 
     }
 

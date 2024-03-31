@@ -36,9 +36,12 @@ class ClazzServiceTest {
         assertAll(
                 "Assert that Expected Class has been returned"
                 , () -> assertNotNull(result)
-                , () -> assertEquals(expected.getId(), result.getId())
-                , () -> assertEquals(expected.getName(), result.getName())
-                , () -> assertEquals(expected.getCourse(), result.getCourse())
+                , () -> assertEquals(expected.getId(),              result.getId())
+                , () -> assertEquals(expected.getName(),            result.getName())
+                , () -> assertEquals(expected.getCourse(),          result.getCourse())
+                , () -> assertEquals(expected.getInitDate(),        result.getInitDate())
+                , () -> assertEquals(expected.getRecoveryDate(),    result.getRecoveryDate())
+                , () -> assertEquals(expected.getEndDate(),         result.getEndDate())
         );
     }
 

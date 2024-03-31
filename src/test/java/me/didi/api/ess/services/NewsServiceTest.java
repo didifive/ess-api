@@ -76,7 +76,6 @@ class NewsServiceTest {
     @Test
     @DisplayName("3. Find News by Id")
     void findById() {
-        News news = Instancio.create(News.class);
         String id = news.getId();
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(news));

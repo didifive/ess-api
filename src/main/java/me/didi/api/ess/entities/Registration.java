@@ -27,8 +27,17 @@ public class Registration implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<Subject> subjects;
     private LocalDate registrationDate;
-    private LocalDate recoveryDate;
-    private LocalDate endDate;
+
+    public Registration() {
+    }
+
+    public Registration(Student student,
+                        Clazz clazz,
+                        Set<Subject> subjects) {
+        this.id = new RegistrationId(student, clazz);
+        this.subjects = subjects;
+        this.registrationDate = LocalDate.now();
+    }
 
     public RegistrationId getId() {
         return id;
@@ -48,26 +57,6 @@ public class Registration implements Serializable {
 
     public LocalDate getRegistrationDate() {
         return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public LocalDate getRecoveryDate() {
-        return recoveryDate;
-    }
-
-    public void setRecoveryDate(LocalDate recoveryDate) {
-        this.recoveryDate = recoveryDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     @Override
@@ -99,11 +88,11 @@ public class Registration implements Serializable {
             return RegistrationStatus.ONGOING;
         }
 
-        if (this.endDate.isBefore(LocalDate.now())) {
+        if (this.getId().getClazz().getEndDate().isBefore(LocalDate.now())) {
             return this.getStatusAfterEventDate(grades, END_DATE);
         }
 
-        if (this.recoveryDate.isBefore(LocalDate.now())) {
+        if (this.getId().getClazz().getRecoveryDate().isBefore(LocalDate.now())) {
             return this.getStatusAfterEventDate(grades, RECOVERY_DATE);
         }
 
@@ -150,8 +139,6 @@ public class Registration implements Serializable {
                 "id=" + id +
                 ", subjects=" + subjects +
                 ", registrationDate=" + registrationDate +
-                ", recoveryDate=" + recoveryDate +
-                ", endDate=" + endDate +
                 '}';
     }
 }

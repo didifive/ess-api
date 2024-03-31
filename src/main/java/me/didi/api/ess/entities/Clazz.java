@@ -3,6 +3,7 @@ package me.didi.api.ess.entities;
 import jakarta.persistence.*;
 import me.didi.api.ess.entities.abstracts.BasicEntity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity(name = "class")
@@ -11,22 +12,38 @@ public class Clazz extends BasicEntity {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "course_id")
     private Course course;
+    private LocalDate initDate;
+    private LocalDate recoveryDate;
+    private LocalDate endDate;
 
     public Clazz() {
     }
 
     public Clazz(String id,
                  String name,
-                 Course course) {
+                 Course course,
+                 LocalDate initDate,
+                 LocalDate recoveryDate,
+                 LocalDate endDate
+                 ) {
         super(id);
         this.name = name;
         this.course = course;
+        this.initDate = initDate;
+        this.recoveryDate = recoveryDate;
+        this.endDate = endDate;
     }
 
     public Clazz(String name,
-                 Course course) {
+                 Course course,
+                 LocalDate initDate,
+                 LocalDate recoveryDate,
+                 LocalDate endDate) {
         this.name = name;
         this.course = course;
+        this.initDate = initDate;
+        this.recoveryDate = recoveryDate;
+        this.endDate = endDate;
     }
 
     public String getName() {
@@ -43,6 +60,30 @@ public class Clazz extends BasicEntity {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public LocalDate getInitDate() {
+        return initDate;
+    }
+
+    public void setInitDate(LocalDate initDate) {
+        this.initDate = initDate;
+    }
+
+    public LocalDate getRecoveryDate() {
+        return recoveryDate;
+    }
+
+    public void setRecoveryDate(LocalDate recoveryDate) {
+        this.recoveryDate = recoveryDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override

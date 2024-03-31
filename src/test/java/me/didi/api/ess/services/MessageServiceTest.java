@@ -77,7 +77,6 @@ class MessageServiceTest {
     @Test
     @DisplayName("3. Find Message by Id")
     void findById() {
-        Message message = Instancio.create(Message.class);
         String id = message.getId();
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(message));

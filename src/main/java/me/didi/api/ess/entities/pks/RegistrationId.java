@@ -54,4 +54,12 @@ public class RegistrationId implements Serializable {
     public int hashCode() {
         return Objects.hash(getStudent(), getClazz());
     }
+
+    @Override
+    public String toString() {
+        return "RegistrationId{" +
+                "studentId=" + student.getId() +
+                ", clazzId=" + clazz.getId() +
+                '}';
+    }
 }

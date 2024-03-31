@@ -1,6 +1,8 @@
 package me.didi.api.ess.entities;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import me.didi.api.ess.entities.pks.GradeId;
+import me.didi.api.ess.entities.pks.RegistrationId;
 import me.didi.api.ess.enums.GradeType;
 import me.didi.api.ess.enums.RegistrationStatus;
 import org.instancio.Instancio;
@@ -34,8 +36,8 @@ class RegistrationTest {
     @BeforeEach
     void setup(TestInfo info) {
         Set<Subject> subjects = Instancio.stream(Subject.class).limit(10).collect(Collectors.toSet());
-        registration = Instancio.of(Registration.class)
-                .set(field("registrationDate"), LocalDate.now().minusMonths(1))
+        Clazz clazz = Instancio.of(Clazz.class)
+                .set(field("initDate"), LocalDate.now().minusMonths(1))
                 .set(field("recoveryDate")
                         , info.getTags().stream().anyMatch(t -> t.equals(PASSED_RECOVERY_DATE)) ?
                                 LocalDate.now().minusDays(2) :
@@ -44,9 +46,14 @@ class RegistrationTest {
                         , info.getTags().stream().anyMatch(t -> t.equals(PASSED_END_DATE)) ?
                                 LocalDate.now().minusDays(1) :
                                 LocalDate.now().plusDays(5))
+                .create();
+        RegistrationId registrationId = Instancio.of(RegistrationId.class)
+                .set(field("clazz"), clazz)
+                .create();
+        registration = Instancio.of(Registration.class)
+                .set(field("id"), registrationId)
                 .set(field("subjects"), subjects)
                 .create();
-        registration.getSubjects().addAll(subjects);
         subjects.forEach(subject -> {
             if (info.getTags().stream().anyMatch(t -> t.equals(HAS_ONGOING_GRADE))) {
                 if (grades.stream().anyMatch(g -> g.getGradeType().equals(GradeType.ONGOING))) {
