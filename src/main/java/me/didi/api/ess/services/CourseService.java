@@ -46,18 +46,22 @@ public class CourseService {
                         "] Not Found!"));
     }
 
-    public void addMessage(String courseId, Message message) {
+    public Message addMessage(String courseId, Message message) {
         Course course = this.findById(courseId);
 
         Set<Message> messages = Objects.isNull(course.getMessages())
                 ? new HashSet<>()
                 : course.getMessages();
 
-        messages.add(messageService.save(message));
+        Message newMessage = messageService.save(message);
+
+        messages.add(newMessage);
 
         course.setMessages(messages);
 
         this.save(course);
+
+        return newMessage;
     }
 
     public void removeMessage(String courseId, String messageId) {
@@ -76,18 +80,22 @@ public class CourseService {
         this.save(course);
     }
 
-    public void addNews(String courseId, News news) {
+    public News addNews(String courseId, News news) {
         Course course = this.findById(courseId);
 
         Set<News> newsSet = Objects.isNull(course.getNews())
                 ? new HashSet<>()
                 : course.getNews();
 
-        newsSet.add(newsService.save(news));
+        News newNews = newsService.save(news);
+
+        newsSet.add(newNews);
 
         course.setNews(newsSet);
 
         this.save(course);
+
+        return newNews;
     }
 
     public void removeNews(String courseId, String shortcutId) {
@@ -106,18 +114,22 @@ public class CourseService {
         repository.save(course);
     }
 
-    public void addShortcut(String courseId, Shortcut shortcut) {
+    public Shortcut addShortcut(String courseId, Shortcut shortcut) {
         Course course = this.findById(courseId);
 
         Set<Shortcut> shortcuts = Objects.isNull(course.getShortcuts())
                 ? new HashSet<>()
                 : course.getShortcuts();
 
-        shortcuts.add(shortcutService.save(shortcut));
+        Shortcut newShortcut = shortcutService.save(shortcut);
+
+        shortcuts.add(newShortcut);
 
         course.setShortcuts(shortcuts);
 
         repository.save(course);
+
+        return newShortcut;
     }
 
     public void removeShortcut(String courseId, String shortcutId) {
