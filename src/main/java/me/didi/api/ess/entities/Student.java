@@ -1,10 +1,14 @@
 package me.didi.api.ess.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import me.didi.api.ess.entities.abstracts.BasicEntity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "student")
 public class Student extends BasicEntity implements Serializable {
@@ -12,6 +16,20 @@ public class Student extends BasicEntity implements Serializable {
     private String familyName;
     private String guardian;
     private String photo;
+
+    @OneToMany(mappedBy = "id.student"
+            , fetch = FetchType.LAZY
+            , cascade = {CascadeType.ALL}
+            , orphanRemoval = true)
+    private Set<Registration> registrations;
+
+    public Set<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    public void setRegistrations(Set<Registration> registrations) {
+        this.registrations = registrations;
+    }
 
     public Student() {
     }

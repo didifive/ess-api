@@ -1,7 +1,5 @@
 package me.didi.api.ess.entities;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import me.didi.api.ess.entities.pks.GradeId;
 import me.didi.api.ess.entities.pks.RegistrationId;
 import me.didi.api.ess.enums.GradeType;
 import me.didi.api.ess.enums.RegistrationStatus;
@@ -30,11 +28,12 @@ class RegistrationTest {
     public static final String HAS_PARTIAL_GRADE = "HasPartialGrade";
     public static final String HAS_PASSING_SCORE = "HasPassingScore";
     public static final String NO_PASSING_SCORE = "NoPassingScore";
-    private final Set<Grade> grades = new HashSet<>();
     private Registration registration;
 
     @BeforeEach
     void setup(TestInfo info) {
+        Set<Grade> grades = new HashSet<>();
+
         Set<Subject> subjects = Instancio.stream(Subject.class).limit(10).collect(Collectors.toSet());
         Clazz clazz = Instancio.of(Clazz.class)
                 .set(field("initDate"), LocalDate.now().minusMonths(1))
@@ -76,24 +75,25 @@ class RegistrationTest {
             } else {
                 grades.add(new Grade(registration, subject, GradeType.FINAL, new BigDecimal(10)));
             }
-
         });
+        registration.setGrades(grades);
     }
 
 
     @Test
     @DisplayName("01. Status Ongoing When No Passed Recory and End Date")
     void courseStatusOngoingWhenNoPassedRecoveryDateAndNoPassedEndDate() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.ONGOING, result);
     }
+
     @Test
     @DisplayName("02. Status Ongoing When Has Ongoing Grade")
     @Tags(value = {@Tag(value = PASSED_END_DATE),
             @Tag(value = HAS_ONGOING_GRADE)})
     void courseStatusOngoingWhenPassedEndDateAndHasOngoingGrade() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.ONGOING, result);
     }
@@ -103,7 +103,7 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_END_DATE),
             @Tag(value = HAS_PARTIAL_GRADE)})
     void courseStatusOngoingWhenPassedEndDateAndHasPartialGrade() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.ONGOING, result);
     }
@@ -113,9 +113,13 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_RECOVERY_DATE),
             @Tag(value = NO_PASSING_SCORE)})
     void courseStatusOngoingWhenGradesSubjectsIsLowerThanCourseSubjects() {
-        grades.remove(grades.stream().findFirst().orElseThrow(IllegalAccessError::new));
+        Set<Grade> fewGrades = registration.getGrades();
 
-        RegistrationStatus result = registration.status(grades);
+        fewGrades.remove(fewGrades.stream().findAny().orElseThrow(IllegalAccessError::new));
+
+        registration.setGrades(fewGrades);
+
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.ONGOING, result);
     }
@@ -125,7 +129,7 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_END_DATE),
             @Tag(value = HAS_PASSING_SCORE)})
     void courseStatusApprovedWhenPassedEndDateAndHasPassingScore() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.APPROVED, result);
     }
@@ -135,7 +139,7 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_END_DATE),
             @Tag(value = NO_PASSING_SCORE)})
     void courseStatusDisapprovedWhenPassedEndDateAndNoPassingScore() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.DISAPPROVED, result);
     }
@@ -146,7 +150,7 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_RECOVERY_DATE),
             @Tag(value = HAS_PASSING_SCORE)})
     void courseStatusRecoveryWhenPassedRecoveryDateAndHasPassingScore() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.APPROVED, result);
     }
@@ -156,40 +160,20 @@ class RegistrationTest {
     @Tags(value = {@Tag(value = PASSED_RECOVERY_DATE),
             @Tag(value = NO_PASSING_SCORE)})
     void courseStatusRecoveryWhenPassedRecoveryDateAndHasNoPassingScore() {
-        RegistrationStatus result = registration.status(grades);
+        RegistrationStatus result = registration.status();
 
         assertEquals(RegistrationStatus.RECOVERY, result);
     }
 
     @Test
-    @DisplayName("09. Illegal Argument Exception When Set of Grades Has Another Registration")
-    @Tags(value = {@Tag(value = PASSED_RECOVERY_DATE),
-            @Tag(value = NO_PASSING_SCORE)})
-    void IllegalArgumentExceptionWhenSetOfGradesHasAnotherRegistration() {
-        grades.add(Instancio.create(Grade.class));
-
-        assertThrowsExceptionWithCorrectMessage(
-                () -> registration.status(grades),
-                IllegalArgumentException.class,
-                "Argument with set of grades has a wrong registration!" +
-                        " - Registration(s): [" +
-                        grades.stream()
-                                .map(g -> g.getId().getRegistration())
-                                .map(Registration::toString)
-                                .collect(Collectors.joining(",%n")) +
-                        "]"
-        );
-    }
-
-    @Test
-    @DisplayName("10. Illegal Argument Exception When Wrong Event is Used")
+    @DisplayName("09. Illegal Argument Exception When Wrong Event is Used")
     @Tags(value = {@Tag(value = PASSED_END_DATE),
             @Tag(value = NO_PASSING_SCORE)})
     void IllegalArgumentExceptionWhenWrongEventIsUsed() {
         assertThrowsExceptionWithCorrectMessage(
                 () -> ReflectionTestUtils.invokeMethod(registration,
                         "getStatusAfterEventDate",
-                        grades,
+                        registration.getGrades(),
                         "WrongEvent"),
                 IllegalArgumentException.class,
                 "Argument event [" +

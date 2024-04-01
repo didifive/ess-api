@@ -28,6 +28,12 @@ public class Registration implements Serializable {
     private Set<Subject> subjects;
     private LocalDate registrationDate;
 
+    @OneToMany(mappedBy = "id.registration"
+            , fetch = FetchType.LAZY
+            , cascade = {CascadeType.ALL}
+            , orphanRemoval = true)
+    private Set<Grade> grades;
+
     public Registration() {
     }
 
@@ -63,6 +69,14 @@ public class Registration implements Serializable {
         return registrationDate;
     }
 
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,28 +90,18 @@ public class Registration implements Serializable {
         return Objects.hash(getId());
     }
 
-    public RegistrationStatus status(Set<Grade> grades) {
-        if (grades.stream().anyMatch(g -> !g.getId().getRegistration().equals(this))) {
-            throw new IllegalArgumentException("Argument with set of grades has a wrong registration!" +
-                    " - Registration(s): [" +
-                    grades.stream()
-                            .map(g -> g.getId().getRegistration())
-                            .map(Registration::toString)
-                            .collect(Collectors.joining(",%n")) +
-                    "]");
-        }
-
-        Set<Subject> gradesSubjects = grades.stream().map(g -> g.getId().getSubject()).collect(Collectors.toSet());
+    public RegistrationStatus status() {
+        Set<Subject> gradesSubjects = this.grades.stream().map(g -> g.getId().getSubject()).collect(Collectors.toSet());
         if (!gradesSubjects.containsAll(this.subjects)) {
             return RegistrationStatus.ONGOING;
         }
 
         if (this.getId().getClazz().getEndDate().isBefore(LocalDate.now())) {
-            return this.getStatusAfterEventDate(grades, END_DATE);
+            return this.getStatusAfterEventDate(this.grades, END_DATE);
         }
 
         if (this.getId().getClazz().getRecoveryDate().isBefore(LocalDate.now())) {
-            return this.getStatusAfterEventDate(grades, RECOVERY_DATE);
+            return this.getStatusAfterEventDate(this.grades, RECOVERY_DATE);
         }
 
         return RegistrationStatus.ONGOING;

@@ -5,6 +5,7 @@ import me.didi.api.ess.entities.abstracts.BasicEntity;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "class")
 public class Clazz extends BasicEntity {
@@ -15,6 +16,20 @@ public class Clazz extends BasicEntity {
     private LocalDate initDate;
     private LocalDate recoveryDate;
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "id.clazz"
+            , fetch = FetchType.LAZY
+            , cascade = {CascadeType.ALL}
+            , orphanRemoval = true)
+    private Set<Registration> registrations;
+
+    public Set<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    public void setRegistrations(Set<Registration> registrations) {
+        this.registrations = registrations;
+    }
 
     public Clazz() {
     }
