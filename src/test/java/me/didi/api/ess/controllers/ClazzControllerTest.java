@@ -19,9 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static me.didi.api.ess.utils.JsonConvertionUtils.asJsonString;
+import static me.didi.api.ess.utils.constants.ConstantsUtils.DATE_PATTERN;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.Is.isA;
 import static org.instancio.Select.field;
@@ -49,6 +52,8 @@ class ClazzControllerTest {
 
     @BeforeEach
     void setup() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
                 .setViewResolvers((s, locale) -> new MappingJackson2JsonView())
@@ -57,13 +62,16 @@ class ClazzControllerTest {
         Course course = Instancio.create(Course.class);
         requestDTO = Instancio.of(ClazzRequestDTO.class)
                 .set(field("courseId"), course.getId())
+                .set(field("initDate"),"2024-01-15")
+                .set(field("recoveryDate"),"2024-11-30")
+                .set(field("endDate"),"2024-12-31")
                 .create();
         clazz = Instancio.of(Clazz.class)
                 .set(field("name"), requestDTO.name())
                 .set(field("course"), course)
-                .set(field("initDate"), requestDTO.initDate())
-                .set(field("recoveryDate"), requestDTO.recoveryDate())
-                .set(field("endDate"), requestDTO.endDate())
+                .set(field("initDate"), LocalDate.parse(requestDTO.initDate(),formatter))
+                .set(field("recoveryDate"), LocalDate.parse(requestDTO.recoveryDate(),formatter))
+                .set(field("endDate"), LocalDate.parse(requestDTO.endDate(),formatter))
                 .create();
         responseDTO = ClazzResponseDTO.toDto(clazz);
     }
