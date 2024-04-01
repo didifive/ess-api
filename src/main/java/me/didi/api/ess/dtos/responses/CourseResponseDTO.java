@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public record CourseResponseDTO(String id,
-                                String name,
-                                @Enumerated(EnumType.STRING)
-                                Frequency frequency,
-                                List<MessageResponseDTO> messages,
-                                List<NewsResponseDTO> news,
-                                List<ShortcutResponseDTO> shortcuts
+public record CourseResponseDTO(
+        String id,
+        String name,
+        @Enumerated(EnumType.STRING)
+        Frequency frequency,
+        List<MessageResponseDTO> messages,
+        List<NewsResponseDTO> news,
+        List<ShortcutResponseDTO> shortcuts
 ) {
 
     public static synchronized CourseResponseDTO toDto(Course entity) {

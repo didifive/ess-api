@@ -1,16 +1,16 @@
 package me.didi.api.ess.dtos.responses;
 
-import me.didi.api.ess.entities.News;
+import me.didi.api.ess.entities.Subject;
 
-public record NewsResponseDTO(
+public record SubjectResponseDTO(
         String id,
         String icon,
         String title,
         String description
 ) {
 
-    public static synchronized NewsResponseDTO toDto(News entity) {
-        return new NewsResponseDTO(
+    public static synchronized SubjectResponseDTO toDto(Subject entity) {
+        return new SubjectResponseDTO(
                 entity.getId(),
                 entity.getIcon(),
                 entity.getTitle(),

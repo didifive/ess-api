@@ -7,12 +7,13 @@ import java.time.LocalDateTime;
 
 import static me.didi.api.ess.utils.constants.ConstantsUtils.DATE_TIME_PATTERN;
 
-public record MessageResponseDTO(String id,
-                                 String icon,
-                                 String title,
-                                 String description,
-                                 @JsonFormat(pattern = DATE_TIME_PATTERN)
-                                 LocalDateTime dateTime
+public record MessageResponseDTO(
+        String id,
+        String icon,
+        String title,
+        String description,
+        @JsonFormat(pattern = DATE_TIME_PATTERN)
+        LocalDateTime dateTime
 ) {
 
     public static synchronized MessageResponseDTO toDto(Message entity) {

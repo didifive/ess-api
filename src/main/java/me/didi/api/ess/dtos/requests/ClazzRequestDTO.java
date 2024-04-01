@@ -2,7 +2,6 @@ package me.didi.api.ess.dtos.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import me.didi.api.ess.entities.Clazz;
 import me.didi.api.ess.entities.Course;
 
@@ -16,20 +15,18 @@ public record ClazzRequestDTO(
         String name,
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String courseId,
-        @NotNull(message = NOT_BE_NULL)
+        @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         @JsonFormat(pattern = DATE_PATTERN)
         String initDate,
-        @NotNull(message = NOT_BE_NULL)
+        @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         @JsonFormat(pattern = DATE_PATTERN)
         String recoveryDate,
-        @NotNull(message = NOT_BE_NULL)
+        @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         @JsonFormat(pattern = DATE_PATTERN)
         String endDate
 ) {
 
     public static final String NOT_BE_NULL_EMPTY_OR_BLANK = "Not be null, empty or blank";
-    public static final String NOT_BE_NULL = "Not be null";
-
 
     public static synchronized Clazz toEntity(ClazzRequestDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
