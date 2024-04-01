@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Course Controllers Tests")
+@DisplayName("Course Controller Tests")
 @ExtendWith(MockitoExtension.class)
 class CourseControllerTest {
 

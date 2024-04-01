@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("News Controllers Tests")
+@DisplayName("News Controller Tests")
 @ExtendWith(MockitoExtension.class)
 class NewsControllerTest {
 

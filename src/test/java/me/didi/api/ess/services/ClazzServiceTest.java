@@ -18,17 +18,20 @@ import java.util.UUID;
 import static me.didi.api.ess.utils.Assertions.assertThrowsExceptionWithCorrectMessage;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Clazz Service Tests")
+@DisplayName("Class Service Tests")
 @ExtendWith(MockitoExtension.class)
 class ClazzServiceTest {
 
     @Mock
     private ClazzRepository repository;
+    @Mock
+    private CourseService courseService;
     @InjectMocks
-    private ClazzService service;
+    private ClazzService clazzService;
 
     private Clazz clazz;
 
@@ -53,11 +56,18 @@ class ClazzServiceTest {
     @Test
     @DisplayName("1. Save New Class")
     void saveNewClazz() {
+        when(courseService.findById(clazz.getCourse().getId()))
+                .thenReturn(clazz.getCourse());
         when(repository.save(any(Clazz.class))).thenReturn(clazz);
 
-        Clazz result = service.save(clazz);
+        Clazz result = clazzService.save(clazz);
 
         assertClazz(clazz, result);
+
+        verify(courseService).findById(anyString());
+        verifyNoMoreInteractions(courseService);
+        verify(repository).save(any(Clazz.class));
+        verifyNoMoreInteractions(repository);
     }
 
     @Test
@@ -65,7 +75,7 @@ class ClazzServiceTest {
     void findAll() {
         when(repository.findAll()).thenReturn(List.of(clazz));
 
-        List<Clazz> result = service.findAll();
+        List<Clazz> result = clazzService.findAll();
 
         assertAll("Assert that a list of the Classes has been returned",
                 () -> assertInstanceOf(List.class, result),
@@ -82,7 +92,7 @@ class ClazzServiceTest {
 
         when(repository.findById(any(String.class))).thenReturn(Optional.of(clazz));
 
-        Clazz result = service.findById(id);
+        Clazz result = clazzService.findById(id);
 
         assertClazz(clazz, result);
 
@@ -96,7 +106,7 @@ class ClazzServiceTest {
         when(repository.findById(any(String.class))).thenReturn(Optional.empty());
 
         assertThrowsExceptionWithCorrectMessage(
-                () -> service.findById(invalidId),
+                () -> clazzService.findById(invalidId),
                 EntityNotFoundException.class,
                 "Class with Id [" +
                         invalidId +

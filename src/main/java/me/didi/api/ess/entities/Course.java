@@ -38,6 +38,10 @@ public class Course extends BasicEntity implements Serializable {
     public Course() {
     }
 
+    public Course(String id) {
+        super(id);
+    }
+
     public Course(String id,
                   String name,
                   Frequency frequency,

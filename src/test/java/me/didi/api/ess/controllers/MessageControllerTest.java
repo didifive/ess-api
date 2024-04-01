@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Message Controllers Tests")
+@DisplayName("Message Controller Tests")
 @ExtendWith(MockitoExtension.class)
 class MessageControllerTest {
 

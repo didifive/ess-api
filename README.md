@@ -296,7 +296,10 @@ Banner do Spring personalizado
 ![ESS Custom Spring Banner](docs/banner.PNG?raw=true "ESS Custom Spring Banner")  
 
 Console do H2 (banco de dados) mostrando as tabelas criadas e os dados de uma tabela de relação de muitos para muitos que relaciona o Estudante, a Turma e a Matéria matriculada   
-![H2 Console Tables and some Tuples](docs/h2console.PNG?raw=true "H2 Console Tables and some Tuples")
+![H2 Console Tables and some Tuples](docs/h2console.PNG?raw=true "H2 Console Tables and some Tuples"  
+
+Retorno de erro com DTO personalizado com tratamento para timestamp, status, mensagem e path utilizando a classe `me.didi.api.ess.dtos.ApiErrorDTO`  
+![A return of ApiErrorDTO](docs/apierrordto.PNG?raw=true "A return of ApiErrorDTO")  
 
 Swagger  
 [TODO]  

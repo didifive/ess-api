@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Student Controllers Tests")
+@DisplayName("Student Controller Tests")
 @ExtendWith(MockitoExtension.class)
 class StudentControllerTest {
 

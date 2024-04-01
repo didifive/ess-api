@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
-@DisplayName("Shortcut Controllers Tests")
+@DisplayName("Shortcut Controller Tests")
 @ExtendWith(MockitoExtension.class)
 class ShortcutControllerTest {
 
