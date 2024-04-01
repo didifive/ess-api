@@ -65,8 +65,8 @@ public class CourseController {
 
     @PostMapping("/{id}/message/add")
     public ResponseEntity<Void> addMessage(
-            @RequestBody @Valid MessageRequestDTO dto,
             @PathVariable String id,
+            @RequestBody @Valid MessageRequestDTO dto,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -94,8 +94,8 @@ public class CourseController {
 
     @PostMapping("/{id}/news/add")
     public ResponseEntity<Void> addNews(
-            @RequestBody @Valid NewsRequestDTO dto,
             @PathVariable String id,
+            @RequestBody @Valid NewsRequestDTO dto,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -123,8 +123,8 @@ public class CourseController {
 
     @PostMapping("/{id}/shortcut/add")
     public ResponseEntity<Void> addNews(
-            @RequestBody @Valid ShortcutRequestDTO dto,
             @PathVariable String id,
+            @RequestBody @Valid ShortcutRequestDTO dto,
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
