@@ -21,11 +21,6 @@ O primeiro desafio foi fazer uma abstração de um JSON que atendesse uma tela d
 gerar diagrama de classe com a sintaxe mermaid utilizando prompt em uma IA Generativa (por exemplo, ChatGPT) com o JSON criado.
 Com a resposta, aprimorei o diagrama para criar uma API que pode atender uma situação problema real para cadastro e controle
 de estudantes, cursos, turmas, matrículas e notas e atenda à tela da amostra.  
-Aqui foram abordadas as etapas:  
-- Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
-- Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
-- Criação da API **ESS** 
-- Criação de conta e de banco de dados Postgres utilizando a plataforma [Railway]
 
 ### 🏫 O que é ESS API
 As sigla ESS foi formada pelo nome Escola Shining Star, nome criado para representar o produto deste projeto.  
@@ -34,7 +29,15 @@ matrículas e notas que uma instituição que possui serviços compatíveis poss
 Este projeto disponibiliza Endpoints que viabilizam o cadastro e controle. Os endpoints estão documentados com
 swagger e também estão configurados em coleção do postman para serem utilizados com o aplicativo para realizar as chamadas
 e testes.
-
+Aqui foram abordadas as etapas:
+- Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
+- Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
+- Criação da API **ESS**
+- Criação de conta e de banco de dados Postgres utilizando a plataforma [Railway]
+- Publicação da API no [Railway] utilizando a integração com o GitHub
+  - As variáveis de ambientes comfiguradas para PRD foram configuradas no recurso do Railway
+  - Adicionalmente, como foi utilizado o Java 21 nesse projeto, foi necessário configurar a variável de ambiente "NIXPACKS_JDK_VERSION" com o valor "21".
+    ![Railway Environment Variables](docs/railwayEnvironmentVariables.PNG?raw=true "Railway Environment Variables")
 ---
 
 ## 🔧 Principais tecnologias utilizadas
