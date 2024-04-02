@@ -1,6 +1,7 @@
 package me.didi.api.ess.controllers;
 
 import jakarta.validation.Valid;
+import me.didi.api.ess.controllers.docs.SubjectControllerDocs;
 import me.didi.api.ess.dtos.requests.SubjectRequestDTO;
 import me.didi.api.ess.dtos.responses.SubjectResponseDTO;
 import me.didi.api.ess.exceptions.BadRequestBodyException;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/subject")
-public class SubjectController {
+public class SubjectController implements SubjectControllerDocs {
 
     private final SubjectService subjectService;
 

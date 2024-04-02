@@ -19,7 +19,7 @@ public class Registration implements Serializable {
     public static final BigDecimal PASSING_SCORE = new BigDecimal("7.00");
     @EmbeddedId
     private RegistrationId id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "registrations_subjects",
             joinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "student_id"),
@@ -29,7 +29,7 @@ public class Registration implements Serializable {
     private LocalDate registrationDate;
 
     @OneToMany(mappedBy = "id.registration"
-            , fetch = FetchType.LAZY
+            , fetch = FetchType.EAGER
             , cascade = {CascadeType.ALL}
             , orphanRemoval = true)
     private Set<Grade> grades;
@@ -91,6 +91,9 @@ public class Registration implements Serializable {
     }
 
     public RegistrationStatus status() {
+        if(Objects.isNull(this.grades))
+            return RegistrationStatus.ONGOING;
+
         Set<Subject> gradesSubjects = this.grades.stream().map(g -> g.getId().getSubject()).collect(Collectors.toSet());
         if (!gradesSubjects.containsAll(this.subjects)) {
             return RegistrationStatus.ONGOING;

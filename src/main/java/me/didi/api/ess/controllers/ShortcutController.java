@@ -1,5 +1,6 @@
 package me.didi.api.ess.controllers;
 
+import me.didi.api.ess.controllers.docs.ShortcutControllerDocs;
 import me.didi.api.ess.dtos.responses.ShortcutResponseDTO;
 import me.didi.api.ess.services.ShortcutService;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/shortcut")
-public class ShortcutController {
+public class ShortcutController implements ShortcutControllerDocs {
 
     private final ShortcutService shortcutService;
 

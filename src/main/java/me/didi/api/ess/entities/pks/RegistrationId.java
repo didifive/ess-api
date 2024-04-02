@@ -10,12 +10,12 @@ import java.util.Objects;
 @Embeddable
 public class RegistrationId implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY
+    @ManyToOne(fetch = FetchType.EAGER
             , cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY
+    @ManyToOne(fetch = FetchType.EAGER
             , cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "class_id")
     private Clazz clazz;

@@ -1,6 +1,7 @@
 package me.didi.api.ess.controllers;
 
 import jakarta.validation.Valid;
+import me.didi.api.ess.controllers.docs.StudentControllerDocs;
 import me.didi.api.ess.dtos.requests.StudentRequestDTO;
 import me.didi.api.ess.dtos.responses.StudentResponseDTO;
 import me.didi.api.ess.exceptions.BadRequestBodyException;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/student")
-public class StudentController {
+public class StudentController implements StudentControllerDocs {
 
     private final StudentService studentService;
 

@@ -81,6 +81,15 @@ class RegistrationTest {
 
 
     @Test
+    @DisplayName("0. Status Ongoing When Grades Is Null")
+    void courseStatusOngoingWhenGradesIsNull() {
+        registration.setGrades(null);
+        RegistrationStatus result = registration.status();
+
+        assertEquals(RegistrationStatus.ONGOING, result);
+    }
+
+    @Test
     @DisplayName("01. Status Ongoing When No Passed Recory and End Date")
     void courseStatusOngoingWhenNoPassedRecoveryDateAndNoPassedEndDate() {
         RegistrationStatus result = registration.status();
