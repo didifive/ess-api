@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(servers = {@Server(url = "http://localhost:8080", description = "Localhost")})
+@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 public class EssApplication {
 
 	public static void main(String[] args) {
