@@ -14,7 +14,7 @@
 	<name>ess</name>
 	<description>API for Escola Shining Star</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<springdoc-openapi.version>2.4.0</springdoc-openapi.version>
 		<postgresql.version>42.7.3</postgresql.version>
 		<instancio.version>4.4.0</instancio.version>
