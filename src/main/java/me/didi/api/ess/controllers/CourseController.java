@@ -7,9 +7,7 @@ import me.didi.api.ess.dtos.requests.MessageRequestDTO;
 import me.didi.api.ess.dtos.requests.NewsRequestDTO;
 import me.didi.api.ess.dtos.requests.ShortcutRequestDTO;
 import me.didi.api.ess.dtos.responses.CourseResponseDTO;
-import me.didi.api.ess.exceptions.BadRequestBodyException;
 import me.didi.api.ess.services.CourseService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
 
 @RestController
 @RequestMapping("api/v1/course")
@@ -34,12 +33,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid CourseRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         CourseResponseDTO savedCourse =
                 CourseResponseDTO.toDto(courseService.save(CourseRequestDTO.toEntity(dto)));
@@ -70,12 +64,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid MessageRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/message/{id}")
                 .buildAndExpand(courseService.addMessage(id, MessageRequestDTO.toEntity(dto))).toUri();
@@ -99,12 +88,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid NewsRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/news/{id}")
                 .buildAndExpand(courseService.addNews(id, NewsRequestDTO.toEntity(dto))).toUri();
@@ -128,12 +112,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid ShortcutRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/shortcut/{id}")
                 .buildAndExpand(courseService.addShortcut(id, ShortcutRequestDTO.toEntity(dto))).toUri();

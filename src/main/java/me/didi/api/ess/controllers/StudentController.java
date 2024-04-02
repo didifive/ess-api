@@ -16,6 +16,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+
 @RestController
 @RequestMapping("api/v1/student")
 public class StudentController implements StudentControllerDocs {
@@ -31,12 +33,7 @@ public class StudentController implements StudentControllerDocs {
             @RequestBody @Valid StudentRequestDTO dto,
             BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         StudentResponseDTO savedStudent =
                 StudentResponseDTO.toDto(studentService.save(StudentRequestDTO.toEntity(dto)));

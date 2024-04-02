@@ -4,9 +4,7 @@ import jakarta.validation.Valid;
 import me.didi.api.ess.controllers.docs.RegistrationControllerDocs;
 import me.didi.api.ess.dtos.requests.RegistrationRequestDTO;
 import me.didi.api.ess.dtos.responses.RegistrationResponseDTO;
-import me.didi.api.ess.exceptions.BadRequestBodyException;
 import me.didi.api.ess.services.RegistrationService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
 
 @RestController
 @RequestMapping("api/v1/registration")
@@ -31,12 +30,7 @@ public class RegistrationController implements RegistrationControllerDocs {
             @RequestBody @Valid RegistrationRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         RegistrationResponseDTO savedRegistration =
                 RegistrationResponseDTO.toDto(registrationService.save(RegistrationRequestDTO.toEntity(dto)));

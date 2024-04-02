@@ -4,9 +4,7 @@ import jakarta.validation.Valid;
 import me.didi.api.ess.controllers.docs.ClazzControllerDocs;
 import me.didi.api.ess.dtos.requests.ClazzRequestDTO;
 import me.didi.api.ess.dtos.responses.ClazzResponseDTO;
-import me.didi.api.ess.exceptions.BadRequestBodyException;
 import me.didi.api.ess.services.ClazzService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
 
 @RestController
 @RequestMapping("api/v1/class")
@@ -31,12 +30,7 @@ public class ClazzController implements ClazzControllerDocs {
             @RequestBody @Valid ClazzRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         ClazzResponseDTO savedClass =
                 ClazzResponseDTO.toDto(clazzService.save(ClazzRequestDTO.toEntity(dto)));

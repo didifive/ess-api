@@ -4,9 +4,7 @@ import jakarta.validation.Valid;
 import me.didi.api.ess.controllers.docs.GradeControllerDocs;
 import me.didi.api.ess.dtos.requests.GradeRequestDTO;
 import me.didi.api.ess.dtos.responses.GradeResponseDTO;
-import me.didi.api.ess.exceptions.BadRequestBodyException;
 import me.didi.api.ess.services.GradeService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
 
 @RestController
 @RequestMapping("api/v1/grade")
@@ -31,12 +30,7 @@ public class GradeController implements GradeControllerDocs {
             @RequestBody @Valid GradeRequestDTO dto,
             BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestBodyException(
-                    bindingResult.getFieldErrors().stream()
-                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                            .collect(Collectors.joining("||")));
-        }
+        verifyBodyError(bindingResult);
 
         GradeResponseDTO savedGrade =
                 GradeResponseDTO.toDto(gradeService.save(GradeRequestDTO.toEntity(dto)));

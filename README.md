@@ -316,8 +316,8 @@ Retorno de erro com DTO personalizado com tratamento para timestamp, status, men
 Swagger  
 [TODO]  
 
-Jacoco Report  
-[TODO]
+Relatório de coverage gerado pelo Jacoco  
+![Jacoco Report ](docs/jacoco.PNG?raw=true "Jacoco Report ")  
 
 ---
 
