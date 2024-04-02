@@ -332,6 +332,9 @@ Retorno de erro com DTO personalizado com tratamento para timestamp, status, men
 Swagger do projeto  
 ![Swagger / OpenApi](docs/swagger.PNG?raw=true "Swagger / OpenApi")  
 
+Requisição com Swagger na API hospedada no [Railway] 
+![Railway Swagger](docs/railwaySwagger.PNG?raw=true "Railway Swagger")
+
 Relatório de coverage gerado pelo Jacoco  
 ![Jacoco Report](docs/jacoco.PNG?raw=true "Jacoco Report")  
 
@@ -349,7 +352,7 @@ Abaixo exemplo de um retorno mais complexo como o Registro de Matrícula:
 
 ## ✔️ Testes
 
-Os testes foram feitos utilizando o [JUnit 5], Mockito e MockMVC com Hamcrest.
+Os testes foram feitos utilizando [JUnit 5], Mockito e MockMVC com Hamcrest.
 
 - Para executar os testes pode executar sua IDE ou
 - Utilizando o terminal (PowerShell, Bash ou similiar), basta executar na pasta do projeto o comando abaixo:
