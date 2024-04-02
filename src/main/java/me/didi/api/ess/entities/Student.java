@@ -34,6 +34,10 @@ public class Student extends BasicEntity implements Serializable {
     public Student() {
     }
 
+    public Student(String id) {
+        super(id);
+    }
+
     public Student(String id,
                    String givenName,
                    String familyName,

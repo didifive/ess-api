@@ -1,7 +1,7 @@
 package me.didi.api.ess.utils.constants;
 
-public class ConstantsUtils {
-    private ConstantsUtils() {
+public class GeneralConstantsUtils {
+    private GeneralConstantsUtils() {
         throw new IllegalStateException("Utility class");
     }
 

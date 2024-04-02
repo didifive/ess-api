@@ -13,23 +13,33 @@ RESTful Desenvolvimento da API para projeto do bootcamp Java AI Powered da DIO.
 
 Construída com Java 21 e Spring Boot 3.2.3.
 
+---
+
 ## 🎯 Objetivo 
 Este é um projeto de API criado a partir de desafio de projeto do bootcamp Java AI Powered da DIO.  
-Adicionalmente foi pensado em solução que pode atender uma situação problema real para cadastro de estudantes
-e cursos.  
+Adicionalmente foi pensado em solução que pode atender uma situação problema real para cadastro e controle de estudantes,
+cursos, turmas, matrículas e notas.  
 Aqui foram abordadas as etapas:  
 - Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
 - Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
+- Criação da API **ESS** 
+- ...
 
-## Principais tecnologias
+---
+
+## 🔧 Principais tecnologias utilizadas
 - **Java 21**: Versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
 - **Spring Boot 3**: Versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
 - **Spring Data JPA**: Ferramenta pode simplificar a camada de acesso aos dados, facilitando a integração com bancos de dados SQL;
+
+---
 
 ## 🖼️ Amostra com Figma
 
 O projeto iniciou com a montagem de uma amostra da aplicação utilizando o Figma para ser base para a abstração de informações para dar seguimento ao projeto.  
 🔗 [Amostra no Figma](https://www.figma.com/file/w9kOfqdYnPNcMxunBX5LGQ/ESS?type=design&node-id=0-1&mode=design)
+
+---
 
 ## 💡 Diagrama de Classes (Domínio da API)
 
@@ -287,6 +297,8 @@ classDiagram
 
 O legal desta etapa foi ver que, apesar de no modelo do Figma ter o **Estudante** como base, este não era necessariamente o domínio central, existe uma dependência forte com **Curso**, **Turma** e **Matrícula** para ter a relação do estudante com as matérias e notas.
 
+---
+
 ## 📷 Prints do Projeto
 
 Logotipo do produto ESS Escola Shining Star  
@@ -306,6 +318,8 @@ Swagger
 
 Jacoco Report  
 [TODO]
+
+---
 
 ## ✔️ Testes
 
@@ -329,5 +343,29 @@ Antes de mais nada, é preciso possuir o JDK do Java 21 para conseguir executar.
 Para popular dados automaticamente foram criadas classes que executam ao iniciar a aplicação, assim a aplicação já inicia com dados básicos para gets.   
 As classes estão no pacote `me.didi.api.ess.utils.populate`.
 
+---
+
+## 🔜 Desafios
+Melhorias e desafios para aprimorar o projeto:
+- Criar recurso para alterar estudantes, curso e turma
+- Criar endpoint para adicionar ou remover matérias na matrícula
+- Configurar paginação para os endpoints que retornam lista (findAll)
+- Criar recurso para poder apagar estudantes, curso, turma, matéria, matrícula, nota, mensagem, notícia e atalho:
+  - Para este caso ter atenção com a consistência de dados
+  - De preferência utilizar soft delete para permitir reverter a deleção
+- Aprimorar documentação OpenApi/Swagger com exemplos e descrições para os endpoints e schemas
+- Observabilidade: implementar logs e métricas
+- Implementar cache
+- Incluir e configurar método de autenticação e autorização (por exemplo, Spring Security)
+- Incluir e configurar versionamento de banco utilizando, por exemplo, flyway
+- Utilizar uma solução de banco de dados diferente do H2 (MySQL, Postgres, etc)
+- Criar testes de Integração
+- Criar front-end/app para consumir a API
+- Criar testes e2e
+
+---
+
+📋 Qualquer dúvida, sugestão ou crítica é só entrar em contato ou abrir uma Issue (https://github.com/didifive).  
+💚 Feito com muita dedicação e aprendizado. #EnjoyThis
 
 [Mermaid]: https://mermaid.js.org/

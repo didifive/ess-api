@@ -1,6 +1,6 @@
 package me.didi.api.ess.dtos.requests;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import me.didi.api.ess.entities.Clazz;
 import me.didi.api.ess.entities.Course;
@@ -8,25 +8,26 @@ import me.didi.api.ess.entities.Course;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static me.didi.api.ess.utils.constants.ConstantsUtils.DATE_PATTERN;
+import static me.didi.api.ess.utils.constants.GeneralConstantsUtils.DATE_PATTERN;
+import static me.didi.api.ess.utils.constants.ValidationMessagesAndOpenApiConstantsUtils.*;
 
 public record ClazzRequestDTO(
+        @Schema(example = CLASS_NAME_EXAMPLE)
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String name,
+        @Schema(example = UUID_ID_EXAMPLE)
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String courseId,
+        @Schema(type = STRING, format = DATE, example = DATE_EXAMPLE)
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
-        @JsonFormat(pattern = DATE_PATTERN)
         String initDate,
+        @Schema(type = STRING, format = DATE, example = DATE_EXAMPLE)
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
-        @JsonFormat(pattern = DATE_PATTERN)
         String recoveryDate,
+        @Schema(type = STRING, format = DATE, example = DATE_EXAMPLE)
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
-        @JsonFormat(pattern = DATE_PATTERN)
         String endDate
 ) {
-
-    public static final String NOT_BE_NULL_EMPTY_OR_BLANK = "Not be null, empty or blank";
 
     public static synchronized Clazz toEntity(ClazzRequestDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);

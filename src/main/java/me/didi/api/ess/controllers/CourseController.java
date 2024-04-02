@@ -1,6 +1,7 @@
 package me.didi.api.ess.controllers;
 
 import jakarta.validation.Valid;
+import me.didi.api.ess.controllers.docs.CourseControllerDocs;
 import me.didi.api.ess.dtos.requests.CourseRequestDTO;
 import me.didi.api.ess.dtos.requests.MessageRequestDTO;
 import me.didi.api.ess.dtos.requests.NewsRequestDTO;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/course")
-public class CourseController {
+public class CourseController implements CourseControllerDocs {
 
     private final CourseService courseService;
 

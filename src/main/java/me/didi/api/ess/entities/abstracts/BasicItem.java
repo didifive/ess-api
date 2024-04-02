@@ -14,6 +14,10 @@ public abstract class BasicItem extends BasicEntity {
     protected BasicItem() {
     }
 
+    protected BasicItem(String id) {
+        super(id);
+    }
+
     protected BasicItem(String id,
                         String icon,
                         String title,

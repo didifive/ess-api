@@ -1,6 +1,9 @@
 package me.didi.api.ess.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import me.didi.api.ess.entities.pks.GradeId;
@@ -10,20 +13,33 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity(name="grade")
+@Entity(name = "grade")
 public class Grade implements Serializable {
     @EmbeddedId
     private GradeId id;
     @Enumerated
     private GradeType gradeType;
-    @Column(name="grade_value", precision = 4, scale = 2)
+    @Column(name = "grade_value", precision = 4, scale = 2)
     @Max(10)
     @Min(0)
     private BigDecimal value;
 
-    public Grade() {}
+    public Grade() {
+    }
 
-    public Grade (Registration registration, Subject subject, GradeType gradeType, BigDecimal value) {
+    public Grade(Registration registration, Subject subject, GradeType gradeType, BigDecimal value) {
+        GradeId gradeId = new GradeId();
+        gradeId.setRegistration(registration);
+        gradeId.setSubject(subject);
+
+        this.id = gradeId;
+        this.gradeType = gradeType;
+        this.value = value;
+    }
+
+    public Grade(Student student, Clazz clazz, Subject subject, GradeType gradeType, BigDecimal value) {
+        Registration registration = new Registration(student, clazz, null);
+
         GradeId gradeId = new GradeId();
         gradeId.setRegistration(registration);
         gradeId.setSubject(subject);

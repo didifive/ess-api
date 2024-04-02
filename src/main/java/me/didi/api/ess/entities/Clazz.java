@@ -34,6 +34,11 @@ public class Clazz extends BasicEntity {
     public Clazz() {
     }
 
+    public Clazz(String id
+    ) {
+        super(id);
+    }
+
     public Clazz(String id,
                  String name,
                  Course course,

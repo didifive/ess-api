@@ -1,5 +1,7 @@
 package me.didi.api.ess.dtos.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import me.didi.api.ess.entities.Course;
@@ -9,13 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static me.didi.api.ess.utils.constants.ValidationMessagesAndOpenApiConstantsUtils.UUID_ID_EXAMPLE;
+
 public record CourseResponseDTO(
+        @Schema(example = UUID_ID_EXAMPLE)
         String id,
         String name,
         @Enumerated(EnumType.STRING)
         Frequency frequency,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
         List<MessageResponseDTO> messages,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
         List<NewsResponseDTO> news,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
         List<ShortcutResponseDTO> shortcuts
 ) {
 

@@ -3,6 +3,8 @@ package me.didi.api.ess.dtos.requests;
 import jakarta.validation.constraints.NotBlank;
 import me.didi.api.ess.entities.Message;
 
+import static me.didi.api.ess.utils.constants.ValidationMessagesAndOpenApiConstantsUtils.NOT_BE_NULL_EMPTY_OR_BLANK;
+
 public record MessageRequestDTO(
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String icon,
@@ -11,8 +13,6 @@ public record MessageRequestDTO(
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String description
 ) {
-
-    public static final String NOT_BE_NULL_EMPTY_OR_BLANK = "Not be null, empty or blank";
 
     public static synchronized Message toEntity(MessageRequestDTO dto) {
         return new Message(

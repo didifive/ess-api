@@ -28,6 +28,10 @@ public class Subject extends BasicItem implements Serializable {
     public Subject() {
     }
 
+    public Subject(String id) {
+        super(id);
+    }
+
     public Subject(String id,
                       String icon,
                       String title,

@@ -2,7 +2,6 @@ package me.didi.api.ess.controllers;
 
 import me.didi.api.ess.dtos.requests.ClazzRequestDTO;
 import me.didi.api.ess.dtos.responses.ClazzResponseDTO;
-import me.didi.api.ess.dtos.responses.CourseResponseDTO;
 import me.didi.api.ess.entities.Clazz;
 import me.didi.api.ess.entities.Course;
 import me.didi.api.ess.exceptions.RestExceptionHandler;
@@ -24,9 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static me.didi.api.ess.utils.JsonConvertionUtils.asJsonString;
-import static me.didi.api.ess.utils.constants.ConstantsUtils.DATE_PATTERN;
+import static me.didi.api.ess.utils.constants.GeneralConstantsUtils.DATE_PATTERN;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.Is.isA;
 import static org.instancio.Select.field;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;

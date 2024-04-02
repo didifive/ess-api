@@ -1,5 +1,6 @@
 package me.didi.api.ess.controllers;
 
+import me.didi.api.ess.controllers.docs.MessageControllerDocs;
 import me.didi.api.ess.dtos.responses.MessageResponseDTO;
 import me.didi.api.ess.services.MessageService;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/message")
-public class MessageController {
+public class MessageController implements MessageControllerDocs {
 
     private final MessageService messageService;
 

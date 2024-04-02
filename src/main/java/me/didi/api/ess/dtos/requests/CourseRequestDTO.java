@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import me.didi.api.ess.entities.Course;
 import me.didi.api.ess.enums.Frequency;
 
+import static me.didi.api.ess.utils.constants.ValidationMessagesAndOpenApiConstantsUtils.NOT_BE_NULL;
+import static me.didi.api.ess.utils.constants.ValidationMessagesAndOpenApiConstantsUtils.NOT_BE_NULL_EMPTY_OR_BLANK;
+
 public record CourseRequestDTO(
         @NotBlank(message = NOT_BE_NULL_EMPTY_OR_BLANK)
         String name,
@@ -15,8 +18,7 @@ public record CourseRequestDTO(
         Frequency frequency
 ) {
 
-    public static final String NOT_BE_NULL_EMPTY_OR_BLANK = "Not be null, empty or blank";
-    public static final String NOT_BE_NULL = "Not be null";
+
 
     public static synchronized Course toEntity(CourseRequestDTO dto) {
         return new Course(

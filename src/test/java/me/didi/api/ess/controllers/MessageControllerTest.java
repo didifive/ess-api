@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static me.didi.api.ess.utils.constants.ConstantsUtils.DATE_TIME_PATTERN;
+import static me.didi.api.ess.utils.constants.GeneralConstantsUtils.DATE_TIME_PATTERN;
 import static org.hamcrest.CoreMatchers.is;
 import static org.instancio.Select.field;
 import static org.mockito.ArgumentMatchers.any;

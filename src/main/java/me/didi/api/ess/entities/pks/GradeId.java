@@ -10,12 +10,12 @@ import java.util.Objects;
 @Embeddable
 public class GradeId implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY,
+    @ManyToOne(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     @JoinColumn(name = "class_id", referencedColumnName = "class_id")
     private Registration registration;
-    @ManyToOne(fetch = FetchType.LAZY
+    @ManyToOne(fetch = FetchType.EAGER
             , cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "subject_id")
     private Subject subject;

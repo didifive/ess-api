@@ -1,6 +1,7 @@
 package me.didi.api.ess.controllers;
 
 import jakarta.validation.Valid;
+import me.didi.api.ess.controllers.docs.ClazzControllerDocs;
 import me.didi.api.ess.dtos.requests.ClazzRequestDTO;
 import me.didi.api.ess.dtos.responses.ClazzResponseDTO;
 import me.didi.api.ess.exceptions.BadRequestBodyException;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/class")
-public class ClazzController {
+public class ClazzController implements ClazzControllerDocs {
 
     private final ClazzService clazzService;
 

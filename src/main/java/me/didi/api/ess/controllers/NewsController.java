@@ -1,5 +1,6 @@
 package me.didi.api.ess.controllers;
 
+import me.didi.api.ess.controllers.docs.NewsControllerDocs;
 import me.didi.api.ess.dtos.responses.NewsResponseDTO;
 import me.didi.api.ess.services.NewsService;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/news")
-public class NewsController {
+public class NewsController implements NewsControllerDocs {
 
     private final NewsService newsService;
 
