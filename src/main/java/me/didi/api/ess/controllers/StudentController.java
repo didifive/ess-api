@@ -4,9 +4,7 @@ import jakarta.validation.Valid;
 import me.didi.api.ess.controllers.docs.StudentControllerDocs;
 import me.didi.api.ess.dtos.requests.StudentRequestDTO;
 import me.didi.api.ess.dtos.responses.StudentResponseDTO;
-import me.didi.api.ess.exceptions.BadRequestBodyException;
 import me.didi.api.ess.services.StudentService;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+import static me.didi.api.ess.utils.VerifyError.verifyRequestBodyError;
 
 @RestController
 @RequestMapping("api/v1/student")
@@ -33,7 +30,7 @@ public class StudentController implements StudentControllerDocs {
             @RequestBody @Valid StudentRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         StudentResponseDTO savedStudent =
                 StudentResponseDTO.toDto(studentService.save(StudentRequestDTO.toEntity(dto)));

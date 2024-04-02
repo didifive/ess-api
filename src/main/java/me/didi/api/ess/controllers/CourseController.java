@@ -16,7 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+import static me.didi.api.ess.utils.VerifyError.verifyRequestBodyError;
 
 @RestController
 @RequestMapping("api/v1/course")
@@ -33,7 +33,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid CourseRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         CourseResponseDTO savedCourse =
                 CourseResponseDTO.toDto(courseService.save(CourseRequestDTO.toEntity(dto)));
@@ -64,7 +64,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid MessageRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/message/{id}")
                 .buildAndExpand(courseService.addMessage(id, MessageRequestDTO.toEntity(dto))).toUri();
@@ -88,7 +88,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid NewsRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/news/{id}")
                 .buildAndExpand(courseService.addNews(id, NewsRequestDTO.toEntity(dto))).toUri();
@@ -112,7 +112,7 @@ public class CourseController implements CourseControllerDocs {
             @RequestBody @Valid ShortcutRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/shortcut/{id}")
                 .buildAndExpand(courseService.addShortcut(id, ShortcutRequestDTO.toEntity(dto))).toUri();

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+import static me.didi.api.ess.utils.VerifyError.verifyRequestBodyError;
 
 @RestController
 @RequestMapping("api/v1/grade")
@@ -30,7 +30,7 @@ public class GradeController implements GradeControllerDocs {
             @RequestBody @Valid GradeRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         GradeResponseDTO savedGrade =
                 GradeResponseDTO.toDto(gradeService.save(GradeRequestDTO.toEntity(dto)));

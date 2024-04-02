@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+import static me.didi.api.ess.utils.VerifyError.verifyRequestBodyError;
 
 @RestController
 @RequestMapping("api/v1/registration")
@@ -30,7 +30,7 @@ public class RegistrationController implements RegistrationControllerDocs {
             @RequestBody @Valid RegistrationRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         RegistrationResponseDTO savedRegistration =
                 RegistrationResponseDTO.toDto(registrationService.save(RegistrationRequestDTO.toEntity(dto)));

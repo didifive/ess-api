@@ -2,8 +2,9 @@ package me.didi.api.ess.controllers;
 
 import me.didi.api.ess.dtos.requests.GradeRequestDTO;
 import me.didi.api.ess.dtos.responses.GradeResponseDTO;
-import me.didi.api.ess.entities.Grade;
+import me.didi.api.ess.entities.*;
 import me.didi.api.ess.entities.pks.GradeId;
+import me.didi.api.ess.enums.GradeType;
 import me.didi.api.ess.exceptions.RestExceptionHandler;
 import me.didi.api.ess.services.GradeService;
 import org.instancio.Instancio;
@@ -18,7 +19,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static me.didi.api.ess.utils.JsonConvertionUtils.asJsonString;
 import static org.hamcrest.CoreMatchers.is;
@@ -27,6 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
@@ -52,9 +57,25 @@ class GradeControllerTest {
                 .setViewResolvers((s, locale) -> new MappingJackson2JsonView())
                 .setControllerAdvice(new RestExceptionHandler())
                 .build();
-        requestDTO = Instancio.create(GradeRequestDTO.class);
+        Student student = Instancio.create(Student.class);
+        Clazz clazz = Instancio.create(Clazz.class);
+        Subject subject = Instancio.create(Subject.class);
+        Set<Subject> subjects = Instancio.stream(Subject.class).limit(5).collect(Collectors.toSet());
+        subjects.add(subject);
+        Registration registration = new Registration(
+                student,
+                clazz,
+                subjects
+        );
+        requestDTO = new GradeRequestDTO(
+                student.getId(),
+                clazz.getId(),
+                subject.getId(),
+                GradeType.FINAL,
+                new BigDecimal("10.00")
+        );
         grade = GradeRequestDTO.toEntity(requestDTO);
-        grade.setId(Instancio.create(GradeId.class));
+        grade.setId(new GradeId(registration, subject));
         responseDTO = GradeResponseDTO.toDto(grade);
     }
 
@@ -66,6 +87,7 @@ class GradeControllerTest {
         mockMvc.perform(post(PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(requestDTO)))
+                .andDo(print())
                 .andExpectAll(
                         status().isCreated()
                         , jsonPath("$.student.id", is(responseDTO.student().id()))

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static me.didi.api.ess.utils.VerifyError.verifyBodyError;
+import static me.didi.api.ess.utils.VerifyError.verifyRequestBodyError;
 
 @RestController
 @RequestMapping("api/v1/class")
@@ -30,7 +30,7 @@ public class ClazzController implements ClazzControllerDocs {
             @RequestBody @Valid ClazzRequestDTO dto,
             BindingResult bindingResult) {
 
-        verifyBodyError(bindingResult);
+        verifyRequestBodyError(bindingResult);
 
         ClazzResponseDTO savedClass =
                 ClazzResponseDTO.toDto(clazzService.save(ClazzRequestDTO.toEntity(dto)));
