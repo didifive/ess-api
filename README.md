@@ -25,7 +25,7 @@ Aqui foram abordadas as etapas:
 - Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
 - Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
 - Criação da API **ESS** 
-- ...
+- Criação de conta e de banco de dados Postgres utilizando a plataforma [Railway]
 
 ### 🏫 O que é ESS API
 As sigla ESS foi formada pelo nome Escola Shining Star, nome criado para representar o produto deste projeto.  
@@ -320,6 +320,9 @@ Banner do Spring personalizado
 Console do H2 (banco de dados) mostrando as tabelas criadas e os dados de uma tabela de relação de muitos para muitos que relaciona o Estudante, a Turma e a Matéria matriculada   
 ![H2 Console Tables and some Tuples](docs/h2console.PNG?raw=true "H2 Console Tables and some Tuples")  
 
+Abaixo print do recurso de Postgres criado no [Railway]   
+![Railway Postgres](docs/railwayPostgres.PNG?raw=true "Railway Postgres")  
+
 Retorno de erro com DTO personalizado com tratamento para timestamp, status, mensagem e path utilizando a classe `me.didi.api.ess.dtos.ApiErrorDTO`  
 ![A return of ApiErrorDTO](docs/apierrordto.PNG?raw=true "A return of ApiErrorDTO")  
 
@@ -402,4 +405,5 @@ Melhorias e desafios para aprimorar o projeto:
 💚 Feito com muita dedicação e aprendizado. #EnjoyThis
 
 [Mermaid]: https://mermaid.js.org/
+[Railway]: https://railway.app/
 [ESS.postman_collection.json]: https://github.com/didifive/ess-api/blob/main/docs/ESS.postman_collection.json
