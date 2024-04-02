@@ -1,8 +1,8 @@
 package me.didi.api.ess.utils.populate;
 
 
-import me.didi.api.ess.services.SubjectService;
 import me.didi.api.ess.entities.Subject;
+import me.didi.api.ess.services.SubjectService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,6 +20,10 @@ public class PopulateSubjects implements PopulateData {
     }
 
     public void populate() {
+        List<Subject> existingSubjects = service.findAll();
+        if (!existingSubjects.isEmpty())
+            return;
+
         List<Subject> classes = List.of(
                 new Subject(
                         ICON_LINK,

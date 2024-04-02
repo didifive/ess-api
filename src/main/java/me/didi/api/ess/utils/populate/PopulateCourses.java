@@ -24,6 +24,10 @@ public class PopulateCourses implements PopulateData {
     }
 
     public void populate() {
+        List<Course> existingCourses = service.findAll();
+        if (!existingCourses.isEmpty())
+            return;
+
         Set<Message> messages = Set.of(
                 new Message(
                         ICON_URL,

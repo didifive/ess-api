@@ -24,6 +24,10 @@ public class PopulateClasses implements PopulateData {
     }
 
     public void populate() {
+        List<Clazz> existingClasses = service.findAll();
+        if (!existingClasses.isEmpty())
+            return;
+
         List<Course> courses = courseService.findAll();
 
         List<Clazz> classes = List.of(

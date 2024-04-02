@@ -33,6 +33,10 @@ public class PopulateGrades implements PopulateData {
     }
 
     public void populate() {
+        List<Grade> existingGrades = gradeService.findAll();
+        if (!existingGrades.isEmpty())
+            return;
+
         List<Registration> registrations = registrationService.findAll();
         List<Subject> subjects = subjectService.findAll();
 

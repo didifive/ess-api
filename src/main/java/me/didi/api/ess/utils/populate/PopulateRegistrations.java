@@ -5,7 +5,10 @@ import me.didi.api.ess.entities.Clazz;
 import me.didi.api.ess.entities.Registration;
 import me.didi.api.ess.entities.Student;
 import me.didi.api.ess.entities.Subject;
-import me.didi.api.ess.services.*;
+import me.didi.api.ess.services.ClazzService;
+import me.didi.api.ess.services.RegistrationService;
+import me.didi.api.ess.services.StudentService;
+import me.didi.api.ess.services.SubjectService;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -33,6 +36,10 @@ public class PopulateRegistrations implements PopulateData {
     }
 
     public void populate() {
+        List<Registration> existingRegistrations = registrationService.findAll();
+        if (!existingRegistrations.isEmpty())
+            return;
+
         List<Clazz> classes = clazzService.findAll();
         List<Student> students = studentService.findAll();
         List<Subject> subjects = subjectService.findAll();

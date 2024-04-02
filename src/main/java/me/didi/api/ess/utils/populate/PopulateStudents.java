@@ -1,8 +1,8 @@
 package me.didi.api.ess.utils.populate;
 
 
-import me.didi.api.ess.services.StudentService;
 import me.didi.api.ess.entities.Student;
+import me.didi.api.ess.services.StudentService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,6 +19,10 @@ public class PopulateStudents implements PopulateData {
     }
 
     public void populate() {
+        List<Student> existingStudents = service.findAll();
+        if (!existingStudents.isEmpty())
+            return;
+
         List<Student> students = List.of(
                 new Student(
                         "Joana",
