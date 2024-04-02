@@ -15,9 +15,9 @@ public class VerifyError {
             throw new BadRequestBodyException(
                     bindingResult.getFieldErrors().stream()
                             .map(e ->
-                                    "field: " + e.getField() +
-                                            " message: " + e.getDefaultMessage())
-                            .collect(Collectors.joining("||")));
+                                    "field:[" + e.getField() +
+                                            "] message:[" + e.getDefaultMessage()+"]")
+                            .collect(Collectors.joining(" || ")));
         }
     }
 }

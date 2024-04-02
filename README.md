@@ -317,8 +317,10 @@ Swagger
 [TODO]  
 
 Relatório de coverage gerado pelo Jacoco  
-![Jacoco Report ](docs/jacoco.PNG?raw=true "Jacoco Report ")  
+![Jacoco Report](docs/jacoco.PNG?raw=true "Jacoco Report")  
 
+Retorno de erro na validação de boby em requests, no exemplo é um POST de nova nota (grade) com o body vazio, portanto retorna os campos e respectivas mensagens:  
+![Binding Result](docs/bindingResult.PNG?raw=true "Binding Result")  
 ---
 
 ## ✔️ Testes
