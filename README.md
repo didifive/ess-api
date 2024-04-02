@@ -17,13 +17,23 @@ Construída com Java 21 e Spring Boot 3.2.3.
 
 ## 🎯 Objetivo 
 Este é um projeto de API criado a partir de desafio de projeto do bootcamp Java AI Powered da DIO.  
-Adicionalmente foi pensado em solução que pode atender uma situação problema real para cadastro e controle de estudantes,
-cursos, turmas, matrículas e notas.  
+O primeiro desafio foi fazer uma abstração de um JSON que atendesse uma tela de amostra de uma aplicação feita no Figma, sem seguida
+gerar diagrama de classe com a sintaxe mermaid utilizando prompt em uma IA Generativa (por exemplo, ChatGPT) com o JSON criado.
+Com a resposta, aprimorei o diagrama para criar uma API que pode atender uma situação problema real para cadastro e controle
+de estudantes, cursos, turmas, matrículas e notas e atenda à tela da amostra.  
 Aqui foram abordadas as etapas:  
 - Amostra com Figma: visual de uma tela de aplicativo, no caso, um aplicativo que mostra notas de um aluno.
 - Diagrama de classes: Utilizando IA para elaorar diagrama de classes através de um JSON extraído conforme amostra.
 - Criação da API **ESS** 
 - ...
+
+### 🏫 O que é ESS API
+As sigla ESS foi formada pelo nome Escola Shining Star, nome criado para representar o produto deste projeto.  
+A API foi construída com Java e SpringBoot com objetivo de gerar cadastro e controle para estudantes, cursos, turmas,
+matrículas e notas que uma instituição que possui serviços compatíveis possa utilizar.  
+Este projeto disponibiliza Endpoints que viabilizam o cadastro e controle. Os endpoints estão documentados com
+swagger e também estão configurados em coleção do postman para serem utilizados com o aplicativo para realizar as chamadas
+e testes.
 
 ---
 
@@ -308,24 +318,32 @@ Banner do Spring personalizado
 ![ESS Custom Spring Banner](docs/banner.PNG?raw=true "ESS Custom Spring Banner")  
 
 Console do H2 (banco de dados) mostrando as tabelas criadas e os dados de uma tabela de relação de muitos para muitos que relaciona o Estudante, a Turma e a Matéria matriculada   
-![H2 Console Tables and some Tuples](docs/h2console.PNG?raw=true "H2 Console Tables and some Tuples"  
+![H2 Console Tables and some Tuples](docs/h2console.PNG?raw=true "H2 Console Tables and some Tuples")  
 
 Retorno de erro com DTO personalizado com tratamento para timestamp, status, mensagem e path utilizando a classe `me.didi.api.ess.dtos.ApiErrorDTO`  
 ![A return of ApiErrorDTO](docs/apierrordto.PNG?raw=true "A return of ApiErrorDTO")  
 
-Swagger  
-[TODO]  
+Swagger do projeto  
+![Swagger / OpenApi](docs/swagger.PNG?raw=true "Swagger / OpenApi")  
 
 Relatório de coverage gerado pelo Jacoco  
 ![Jacoco Report](docs/jacoco.PNG?raw=true "Jacoco Report")  
 
 Retorno de erro na validação de boby em requests, no exemplo é um POST de nova nota (grade) com o body vazio, portanto retorna os campos e respectivas mensagens:  
 ![Binding Result](docs/bindingResult.PNG?raw=true "Binding Result")  
+
+Quando utiliza chamada de POST que cria novo recurso, seja um estudante, curso, turma ou mesmo o registro da matrícula, o retorno tem
+o header "Location" que possui link direto para chamar o recurso específico (_GET para findById_).  
+Abaixo exemplo de retorno de cadastro de um Estudante:  
+![Location Header Student](docs/locationHeaderStudent.PNG?raw=true "Location Header Student")  
+Abaixo exemplo de um retorno mais complexo como o Registro de Matrícula:  
+![Location Header Registration](docs/locationHeaderRegistration.PNG?raw=true "Location Header Registration")  
+
 ---
 
 ## ✔️ Testes
 
-Os testes foram feitos utilizando o [JUnit 5], Mockito e MockMVC.
+Os testes foram feitos utilizando o [JUnit 5], Mockito e MockMVC com Hamcrest.
 
 - Para executar os testes pode executar sua IDE ou
 - Utilizando o terminal (PowerShell, Bash ou similiar), basta executar na pasta do projeto o comando abaixo:
@@ -339,7 +357,20 @@ _Após o teste finalizado com sucesso, é possível verificar relatório de cove
 
 ## ⚙ Executando o projeto localmente
 
-Antes de mais nada, é preciso possuir o JDK do Java 21 para conseguir executar.
+Antes de mais nada, é preciso Possuir no mínimo JDK 21 LTS instalado na máquina em que irá executar.
+A execução do projeto pode ser feita utilizando atalhos de sua IDE ou com os comandos abaixo:
+
+```shell
+./mvnw clean package spring-boot:repackage
+java -jar target/ess-0.0.1-SNAPSHOT.jar
+```
+_OBS: caso ocorra erro e estiver utilizando o terminal CMD, no primeiro comando basta remover o "./" antes do mvnw_
+
+### OpenApi / Swagger
+Para acessar a documentação do Swagger OpenAPI v3.1, acesso o link com o projeto em execução: http://localhost:8080/swagger-ui/index.html
+
+### Postman
+Neste projeto tem arquivo de coleção do Postman com os Endpoints configurados: [ESS.postman_collection.json]
 
 ### 👪 Populate
 Para popular dados automaticamente foram criadas classes que executam ao iniciar a aplicação, assim a aplicação já inicia com dados básicos para gets.   
@@ -371,3 +402,4 @@ Melhorias e desafios para aprimorar o projeto:
 💚 Feito com muita dedicação e aprendizado. #EnjoyThis
 
 [Mermaid]: https://mermaid.js.org/
+[ESS.postman_collection.json]: https://github.com/didifive/ess-api/blob/main/docs/ESS.postman_collection.json
