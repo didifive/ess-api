@@ -43,7 +43,10 @@ public class Message extends BasicItem implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Message message = (Message) o;
-        return Objects.equals(getTitle(), message.getTitle())
+        return Objects.equals(getId(), message.getId())
+                && Objects.equals(getIcon(), message.getIcon())
+                && Objects.equals(getTitle(), message.getTitle())
+                && Objects.equals(getDescription(), message.getDescription())
                 && Objects.equals(getDateTime(), message.getDateTime());
     }
 

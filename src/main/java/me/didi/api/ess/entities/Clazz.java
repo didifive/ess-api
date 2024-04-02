@@ -116,6 +116,6 @@ public class Clazz extends BasicEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getCourse());
+        return Objects.hash(super.hashCode(), getName(), getCourse());
     }
 }

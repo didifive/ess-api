@@ -2,6 +2,7 @@ package me.didi.api.ess.dtos.requests;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +29,7 @@ public record GradeRequestDTO(
         GradeType gradeType,
         @NotNull(message = NOT_BE_NULL)
         @DecimalMin(value = "0.00", message = "Valor mínimo deve ser igual ou maior que 0")
-        @DecimalMin(value = "10.00", message = "Valor máximo deve ser igual ou menor que 10")
+        @DecimalMax(value = "10.00", message = "Valor máximo deve ser igual ou menor que 10")
         BigDecimal value
 ) {
     public static synchronized Grade toEntity(GradeRequestDTO dto) {

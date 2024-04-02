@@ -70,6 +70,6 @@ public abstract class BasicItem extends BasicEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIcon(), getTitle());
+        return Objects.hash(super.hashCode(), getIcon(), getTitle(), getDescription());
     }
 }

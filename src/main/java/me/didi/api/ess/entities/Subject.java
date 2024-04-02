@@ -51,13 +51,13 @@ public class Subject extends BasicItem implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Subject subject = (Subject) o;
-        return Objects.equals(getIcon(), subject.getIcon())
-                && Objects.equals(getTitle(), subject.getTitle())
-                && Objects.equals(getDescription(), subject.getDescription());
+        return Objects.equals(getId(), subject.getId())
+                && Objects.equals(getIcon(), subject.getIcon())
+                && Objects.equals(getTitle(), subject.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIcon(), getTitle(), getDescription());
+        return Objects.hash(super.hashCode());
     }
 }

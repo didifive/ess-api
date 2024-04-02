@@ -45,13 +45,14 @@ public class Shortcut extends BasicItem implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Shortcut shortcut = (Shortcut) o;
-        return Objects.equals(getIcon(), shortcut.getIcon())
+        return Objects.equals(getId(), shortcut.getId())
+                && Objects.equals(getIcon(), shortcut.getIcon())
                 && Objects.equals(getTitle(), shortcut.getTitle())
                 && Objects.equals(getLink(), shortcut.getLink());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getIcon(), getLink());
+        return Objects.hash(super.hashCode(), getLink());
     }
 }
